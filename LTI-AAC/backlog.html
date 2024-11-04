@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backlog de Producto - LTI RecruitPro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Backlog de Producto - LTI RecruitPro</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User Story</th>
+                <th>Impacto (Usuario/Negocio)</th>
+                <th>Urgencia</th>
+                <th>Complejidad</th>
+                <th>Esfuerzo Estimado</th>
+                <th>Riesgos y Dependencias</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Publicación de Ofertas de Empleo</td>
+                <td>Alto: aumenta visibilidad y atrae candidatos</td>
+                <td>Alta: tendencia de visibilidad en múltiples portales</td>
+                <td>Alta</td>
+                <td>8 puntos</td>
+                <td>Dependencia de integración con APIs de portales externos.</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Evaluación Automática de Candidatos</td>
+                <td>Muy alto: optimiza tiempo de selección</td>
+                <td>Muy alta: demanda de IA en reclutamiento</td>
+                <td>Alta</td>
+                <td>13 puntos</td>
+                <td>Dependencia en el modelo de IA; posibles ajustes de criterios por feedback.</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Colaboración y Comentarios en Tiempo Real</td>
+                <td>Alto: mejora colaboración y comunicación interna</td>
+                <td>Alta: feedback positivo en otras plataformas</td>
+                <td>Media</td>
+                <td>8 puntos</td>
+                <td>Requiere sincronización de datos en tiempo real; latencia puede afectar experiencia.</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Notificaciones para Seguimiento</td>
+                <td>Medio: mejora experiencia del candidato</td>
+                <td>Media: incrementa la retención del candidato</td>
+                <td>Media</td>
+                <td>5 puntos</td>
+                <td>Necesita gestión de configuración de notificaciones; posible saturación de alertas.</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Programación de Entrevistas</td>
+                <td>Alto: reduce tiempo de coordinación</td>
+                <td>Alta: demanda de automatización en entrevistas</td>
+                <td>Alta</td>
+                <td>8 puntos</td>
+                <td>Dependencia en integración con calendarios externos y disponibilidad en tiempo real.</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Interfaz de Usuario (UI) Web</td>
+                <td>Muy alto: interacción principal del sistema</td>
+                <td>Muy alta: atractivo para adopción inicial</td>
+                <td>Media</td>
+                <td>8 puntos</td>
+                <td>Fundamental para UX, alta personalización; necesita compatibilidad móvil y web.</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Gestión de Ofertas (Edición y Estado)</td>
+                <td>Medio: flexibilidad para reclutadores</td>
+                <td>Media: ediciones frecuentes según experiencia del usuario</td>
+                <td>Media</td>
+                <td>5 puntos</td>
+                <td>Integración con portales de empleo para sincronización en tiempo real.</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Reportes y Análisis de KPIs</td>
+                <td>Medio: valor añadido en decisiones de negocio</td>
+                <td>Baja: análisis no prioritario en la primera versión</td>
+                <td>Alta</td>
+                <td>13 puntos</td>
+                <td>Depende de estructura de datos adecuada y soporte de métricas avanzadas.</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Sistema de Roles y Permisos</td>
+                <td>Medio: permite control de acceso</td>
+                <td>Media: crítico para equipos grandes</td>
+                <td>Media</td>
+                <td>5 puntos</td>
+                <td>Necesita alta precisión en la seguridad; personalización según jerarquía.</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Almacenamiento y Gestión de Archivos</td>
+                <td>Medio: facilita almacenamiento seguro</td>
+                <td>Baja: secundario en la primera versión</td>
+                <td>Media</td>
+                <td>3 puntos</td>
+                <td>Requiere integración con almacenamiento en la nube; políticas de privacidad.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Notas sobre el Backlog</h2>
+    <ul>
+        <li><strong>Impacto (Usuario/Negocio)</strong>: Indica cuánto beneficia al usuario final o al negocio.</li>
+        <li><strong>Urgencia</strong>: Prioridad de implementación basada en las tendencias actuales y feedback recibido.</li>
+        <li><strong>Complejidad</strong>: Nivel de dificultad técnica de cada historia.</li>
+        <li><strong>Esfuerzo Estimado</strong>: Medido en puntos de historia (puntos ágiles), de acuerdo con la dificultad y esfuerzo requerido.</li>
+        <li><strong>Riesgos y Dependencias</strong>: Aspectos a considerar que pueden afectar el desarrollo o la entrega o que dependen de otras funcionalidades.</li>
+    </ul>
+
+    <p>Este backlog prioriza las funcionalidades principales para mejorar la eficiencia y experiencia del usuario, especialmente aquellas que requieren IA, automatización y colaboración en tiempo real, abordando la necesidad de un sistema robusto de reclutamiento en un mercado altamente competitivo.</p>
+</body>
+</html>
