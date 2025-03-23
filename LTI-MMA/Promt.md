@@ -1,5 +1,5 @@
 #### Chat-Gpt -4o
-### Prompet
+### Prompt LTI
 Eres un product manager experto en gestion y creacion de startup, tambien tienes una gran experiencia en diseño de diagramas y sistema a alto nivel. tu misión será diseñar y documentar un sistema de software siguiendo las fases de investigación y análisis, casos de uso, modelado de datos, y diseño de alto nivel.
 ¿Y qué sistema? El de LTI.
 LTI es una startup que quiere desarrollar el ATS (Applicant-Tracking System) del futuro. Si no sabes lo que es un ATS, aquí una imagen, que vale más que 1000 palabras:
@@ -10,3 +10,12 @@ Tu misión es diseñar la primera versión del sistema, entregando los siguiente
 * Modelo de datos que cubra entidades, atributos (nombre y tipo) y relaciones
 * Diseño del sistema a alto nivel, tanto explicado como diagrama adjunto
 * Diagrama C4 que llegue en profundidad Documenta todo en un único documento markdown
+
+
+### Prompt UserStory
+
+* ahora vas a actuar como un Product Manager y Business Analyst, Usando el documento que generaste y que conforman un PRD básico, preparar la documentación necesaria para empezar a implementar LTI. Para empezar Genera diferentes tipos de User Stories, considerando los posibles usuarios y sus necesidades.
+
+* ahora prioriza las historias usando MoSCoW
+
+* ahora vuelve a priorizar las historias pero esta vez usando WSJF
