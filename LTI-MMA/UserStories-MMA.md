@@ -173,3 +173,146 @@ Valores utilizados en escala relativa (Fibonacci): 1, 2, 3, 5, 8, 13
 5. US04 – Comentarios internos colaborativos
 
 ⸻
+
+## 📦 Product Backlog – LTI ATS (priorizado por WSJF)
+
+### 🎯 Épicas
+
+- **EP01 - Gestión de Vacantes**
+- **EP02 - Gestión de Candidatos**
+- **EP03 - Colaboración y Feedback**
+- **EP04 - Experiencia del Candidato**
+- **EP05 - Administración del Sistema**
+- **EP06 - Automatización e IA**
+
+---
+
+### 🔝 Prioridad Alta (Top WSJF)
+
+#### ✅ US05 – Revisar candidatos y dejar feedback
+
+- **Descripción**: Como manager, quiero revisar los perfiles de los candidatos y dejar comentarios, para tomar decisiones colaborativas.
+- **Prioridad**: WSJF 7.00
+- **Tipo**: Feature
+- **Épica**: `EP03 - Colaboración y Feedback`
+
+---
+
+#### ✅ US01 – Crear y publicar una vacante
+
+- **Descripción**: Como reclutador, quiero crear una nueva vacante y publicarla en varios portales desde un solo lugar.
+- **Prioridad**: WSJF 5.60
+- **Tipo**: Feature
+- **Épica**: `EP01 - Gestión de Vacantes`
+
+---
+
+#### ✅ US08 – Ver el estado de mi candidatura
+
+- **Descripción**: Como candidato, quiero consultar el estado de mis postulaciones para saber si sigo en el proceso.
+- **Prioridad**: WSJF 5.33
+- **Tipo**: Feature
+- **Épica**: `EP04 - Experiencia del Candidato`
+
+---
+
+#### ✅ US02 – Ver y filtrar candidatos por criterios
+
+- **Descripción**: Como reclutador, quiero aplicar filtros para encontrar candidatos relevantes de manera rápida.
+- **Prioridad**: WSJF 4.80
+- **Tipo**: Feature
+- **Épica**: `EP02 - Gestión de Candidatos`
+
+---
+
+#### ✅ US04 – Comentarios internos colaborativos
+
+- **Descripción**: Como reclutador, quiero dejar notas internas sobre los candidatos para que todo el equipo esté alineado.
+- **Prioridad**: WSJF 5.00
+- **Tipo**: Feature
+- **Épica**: `EP03 - Colaboración y Feedback`
+
+---
+
+#### ✅ US07 – Aplicar fácilmente a una vacante
+
+- **Descripción**: Como candidato, quiero postularme fácilmente usando mi CV o perfil de LinkedIn.
+- **Prioridad**: WSJF 5.00
+- **Tipo**: Feature
+- **Épica**: `EP04 - Experiencia del Candidato`
+
+---
+
+#### ✅ US09 – Confirmar propuesta de entrevista
+
+- **Descripción**: Como candidato, quiero confirmar el horario de la entrevista sugerida por el sistema.
+- **Prioridad**: WSJF 4.67
+- **Tipo**: Feature
+- **Épica**: `EP04 - Experiencia del Candidato`
+
+---
+
+### 🔄 Prioridad Media
+
+#### 🔄 US10 – Invitar nuevos usuarios y asignar roles
+
+- **Descripción**: Como administrador, quiero poder invitar a miembros del equipo y asignarles roles.
+- **Prioridad**: WSJF 3.60
+- **Tipo**: Feature
+- **Épica**: `EP05 - Administración del Sistema`
+
+---
+
+#### 🔄 US06 – Ver estado general del proceso de vacante
+
+- **Descripción**: Como manager, quiero tener una visión clara del estado general del proceso de selección.
+- **Prioridad**: WSJF 3.20
+- **Tipo**: Feature
+- **Épica**: `EP01 - Gestión de Vacantes`
+
+---
+
+#### 🔄 US13 – Filtrado automático con IA
+
+- **Descripción**: Como sistema, necesito filtrar automáticamente candidatos según criterios definidos usando IA.
+- **Prioridad**: WSJF 3.13
+- **Tipo**: Technical / IA
+- **Épica**: `EP06 - Automatización e IA`
+
+---
+
+### 🔽 Prioridad Baja
+
+#### 🔽 US03 – Propuesta automática de entrevistas
+
+- **Descripción**: Como reclutador, quiero que el sistema proponga horarios automáticamente según disponibilidad.
+- **Prioridad**: WSJF 2.25
+- **Tipo**: Feature
+- **Épica**: `EP06 - Automatización e IA`
+
+---
+
+#### 🔽 US11 – Configurar canales externos de publicación
+
+- **Descripción**: Como administrador, quiero definir en qué portales se publican las vacantes.
+- **Prioridad**: WSJF 2.20
+- **Tipo**: Feature
+- **Épica**: `EP05 - Administración del Sistema`
+
+---
+
+#### 🔽 US12 – Acceder a reportes y métricas
+
+- **Descripción**: Como administrador, quiero tener visibilidad de métricas clave del proceso de contratación.
+- **Prioridad**: WSJF 1.75
+- **Tipo**: Feature
+- **Épica**: `EP05 - Administración del Sistema`
+
+---
+
+#### 🔽 US14 – Proponer horarios óptimos con IA (versión avanzada)
+
+- **Descripción**: Como sistema, quiero usar IA avanzada para proponer los mejores horarios posibles de entrevista.
+- **Prioridad**: WSJF 1.23
+- **Tipo**: Technical / IA
+- **Épica**: `EP06 - Automatización e IA`
