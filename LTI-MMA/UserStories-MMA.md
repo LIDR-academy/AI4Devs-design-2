@@ -88,7 +88,7 @@ Como sistema, necesito calcular un horario óptimo de entrevista según disponib
 
 ⸻
 
-## 🧭 Prioridad de Historias de Usuario – MoSCoW (LTI ATS)
+## 🧭 Prioridad de Historias de Usuario – MoSCoW (LTI MMA)
 
 ### ✅ Must Have (Debe tener - imprescindibles para el MVP)
 
@@ -133,7 +133,7 @@ No se consideran para la primera versión. Serán evaluadas en futuras iteracion
 
 ⸻
 
-## 📊 Prioridad de Historias de Usuario – WSJF (LTI ATS)
+## 📊 Prioridad de Historias de Usuario – WSJF (LTI MMA)
 
 ### 🔍 Fórmula
 
@@ -174,7 +174,7 @@ Valores utilizados en escala relativa (Fibonacci): 1, 2, 3, 5, 8, 13
 
 ⸻
 
-## 📦 Product Backlog – LTI ATS (priorizado por WSJF)
+## 📦 Product Backlog – LTI MMA (priorizado por WSJF)
 
 ### 🎯 Épicas
 
@@ -319,7 +319,7 @@ Valores utilizados en escala relativa (Fibonacci): 1, 2, 3, 5, 8, 13
 
 ---
 
-## 📦 Product Backlog – LTI ATS (priorizado por MoSCoW)
+## 📦 Product Backlog – LTI MMA (priorizado por MoSCoW)
 
 ### 🎯 Épicas
 
@@ -453,3 +453,73 @@ Valores utilizados en escala relativa (Fibonacci): 1, 2, 3, 5, 8, 13
 ### 🔴 Won’t Have (for now)
 
 _No se han identificado historias a excluir por ahora._
+
+---
+
+## 📊 Comparativa de Prioridades: WSJF vs MoSCoW – LTI MMA
+
+Acontinuacion comparamos los resultados de priorizar el backlog del sistema LTI utilizando dos técnicas distintas: **WSJF (Weighted Shortest Job First)** y **MoSCoW**.
+
+---
+
+### 🧠 Enfoques metodológicos
+
+| Criterio                | WSJF                                      | MoSCoW                                          |
+|-------------------------|-------------------------------------------|-------------------------------------------------|
+| Basado en...            | Cálculo de valor relativo y coste/tiempo | Clasificación por criticidad funcional          |
+| Objetivo principal      | Maximizar valor entregado en el menor tiempo posible | Definir qué es imprescindible en el MVP       |
+| Ideal para...           | Equipos con muchas iniciativas en backlog | Proyectos en fases tempranas (MVP, v1)          |
+
+---
+
+### 🔍 Diferencias clave entre ambos backlogs
+
+#### 1. Orden de prioridad no coincide
+
+| Historia                                | Prioridad en WSJF | Prioridad en MoSCoW |
+|----------------------------------------|--------------------|----------------------|
+| US05 – Feedback colaborativo           | #1 (WSJF 7.0)      | Must Have           |
+| US01 – Crear y publicar vacante        | #2 (WSJF 5.6)      | Must Have           |
+| US08 – Estado de candidatura           | #3 (WSJF 5.3)      | Must Have           |
+| US13 – Filtrado IA                     | #10 (WSJF 3.13)    | Must Have           |
+| US03 – Horarios automáticos            | #11 (WSJF 2.25)    | Should Have         |
+| US14 – Horarios óptimos con IA         | #14 (WSJF 1.23)    | Could Have          |
+| US12 – Reportes y métricas             | #13 (WSJF 1.75)    | Should Have         |
+
+**Análisis**:
+
+- WSJF da prioridad a tareas de **alto valor y bajo coste** (como US05).
+- MoSCoW da prioridad a lo que es **funcionalmente imprescindible para el MVP** (como US13), aunque implique mayor esfuerzo.
+
+---
+
+#### 2. Cobertura del MVP
+
+- **MoSCoW** delimita con claridad el MVP: todo lo que es “Must Have” debe estar en la primera versión.
+- **WSJF** entrega una cola ordenada, pero no especifica qué historias se deben incluir en el MVP. Requiere una decisión adicional.
+
+---
+
+#### 3. Énfasis en valor inmediato vs. visión estratégica
+
+- **WSJF** prioriza lo que entrega **valor temprano y rápido** (p. ej., feedback, filtros).
+- **MoSCoW** prioriza lo que el sistema **necesita para funcionar de forma coherente**, incluso si es más costoso (p. ej., automatización IA básica).
+
+---
+
+### 🏁 Conclusión
+
+| Aspecto                  | WSJF                          | MoSCoW                       |
+|--------------------------|-------------------------------|------------------------------|
+| ¿Define MVP?             | No (requiere decisión externa)| Sí (Must Have es el MVP)     |
+| ¿Ordena toda la cola?    | Sí                            | Parcialmente                 |
+| ¿Evalúa esfuerzo?        | Sí                            | No                           |
+| ¿Fácil para stakeholders?| Más técnico                   | Más comprensible             |
+
+---
+
+### ✅ Recomendación
+
+> Utilizar **MoSCoW para definir el alcance del MVP**, y luego aplicar **WSJF para ordenar la implementación dentro del MVP**, maximizando el valor por iteración.
+
+---
