@@ -19,3 +19,7 @@ Tu misión es diseñar la primera versión del sistema, entregando los siguiente
 * ahora prioriza las historias usando MoSCoW
 
 * ahora vuelve a priorizar las historias pero esta vez usando WSJF
+
+* genera el Backlog de producto considerando la priorización WSJF
+
+* gvuelve a genera el Backlog de producto pero esta vez considerando la priorización MoSCoW

@@ -14,19 +14,19 @@
 
 ### 🎯 Reclutador
 
-US01 - Crear y publicar una vacante
+**US01** - Crear y publicar una vacante
 
 Como reclutador, quiero crear una nueva vacante y publicarla en múltiples portales, para recibir candidatos lo antes posible.
 
-US02 - Ver y filtrar candidatos por vacante
+**US02** - Ver y filtrar candidatos por vacante
 
 Como reclutador, quiero ver la lista de candidatos aplicados a una vacante, y filtrarlos por experiencia, palabras clave o skills, para enfocarme en los más adecuados.
 
-US03 - Programar entrevistas automáticamente
+**US03** - Programar entrevistas automáticamente
 
 Como reclutador, quiero que el sistema proponga horarios de entrevista automáticamente según la disponibilidad, para ahorrar tiempo y evitar conflictos.
 
-US04 - Dejar comentarios sobre un candidato
+**US04** - Dejar comentarios sobre un candidato
 
 Como reclutador, quiero anotar observaciones internas sobre un candidato, para compartirlas con el equipo y tomar decisiones en conjunto.
 
@@ -34,11 +34,11 @@ Como reclutador, quiero anotar observaciones internas sobre un candidato, para c
 
 ### 🧑‍💼 Manager de contratación
 
-US05 - Revisar candidatos y dejar feedback
+**US05** - Revisar candidatos y dejar feedback
 
 Como manager, quiero ver los perfiles de candidatos seleccionados y añadir feedback colaborativo, para facilitar la elección del mejor perfil.
 
-US06 - Ver el estado del proceso de selección
+**US06** - Ver el estado del proceso de selección
 
 Como manager, quiero tener una vista clara del estado de cada vacante, para entender en qué etapa está cada candidato.
 
@@ -46,15 +46,15 @@ Como manager, quiero tener una vista clara del estado de cada vacante, para ente
 
 ### 🙋 Candidato
 
-US07 - Aplicar a una vacante
+**US07** - Aplicar a una vacante
 
 Como candidato, quiero aplicar fácilmente a una vacante con mi CV y LinkedIn, para postularme sin fricciones.
 
-US08 - Ver el estado de mi candidatura
+**US08** - Ver el estado de mi candidatura
 
 Como candidato, quiero ver el estado actual de mi postulación, para saber si sigo en el proceso o fui descartado.
 
-US09 - Confirmar entrevista sugerida
+**US09** - Confirmar entrevista sugerida
 
 Como candidato, quiero recibir una notificación con la propuesta de horario de entrevista y poder confirmarla o sugerir cambios, para coordinar de manera cómoda.
 
@@ -62,15 +62,15 @@ Como candidato, quiero recibir una notificación con la propuesta de horario de 
 
 ### 🛠️ Administrador de empresa
 
-US10 - Invitar nuevos usuarios
+**US10** - Invitar nuevos usuarios
 
 Como administrador de empresa, quiero invitar nuevos miembros al sistema, asignándoles roles, para gestionar mi equipo de reclutamiento.
 
-US11 - Configurar canales de publicación
+**US11** - Configurar canales de publicación
 
 Como administrador, quiero configurar qué portales de empleo se conectan con LTI, para publicar vacantes desde una única plataforma.
 
-US12 - Acceder a reportes y estadísticas
+**US12** - Acceder a reportes y estadísticas
 
 Como administrador, quiero ver métricas como tiempo promedio de contratación o número de entrevistas, para analizar el rendimiento del equipo de RRHH.
 
@@ -78,11 +78,11 @@ Como administrador, quiero ver métricas como tiempo promedio de contratación o
 
 ### 🤖 Sistema / Automatización / IA
 
-US13 - Filtrar candidatos automáticamente
+**US13** - Filtrar candidatos automáticamente
 
 Como sistema, necesito analizar los CVs recibidos y filtrarlos por relevancia, para presentar primero los candidatos con mejor match.
 
-US14 - Proponer horario óptimo de entrevista
+**US14** - Proponer horario óptimo de entrevista
 
 Como sistema, necesito calcular un horario óptimo de entrevista según disponibilidad de partes involucradas, para evitar solapamientos y optimizar el tiempo.
 
@@ -166,11 +166,11 @@ Valores utilizados en escala relativa (Fibonacci): 1, 2, 3, 5, 8, 13
 
 ### 🟢 Recomendación para MVP Inicial (Top 5 WSJF)
 
-1. US05 – Revisar candidatos y dejar feedback
-2. US01 – Crear y publicar una vacante
-3. US08 – Ver el estado de mi candidatura
-4. US02 – Ver y filtrar candidatos por criterios
-5. US04 – Comentarios internos colaborativos
+1. **US05** – Revisar candidatos y dejar feedback
+2. **US01** – Crear y publicar una vacante
+3. **US08** – Ver el estado de mi candidatura
+4. **US02** – Ver y filtrar candidatos por criterios
+5. **US04** – Comentarios internos colaborativos
 
 ⸻
 
@@ -316,3 +316,140 @@ Valores utilizados en escala relativa (Fibonacci): 1, 2, 3, 5, 8, 13
 - **Prioridad**: WSJF 1.23
 - **Tipo**: Technical / IA
 - **Épica**: `EP06 - Automatización e IA`
+
+---
+
+## 📦 Product Backlog – LTI ATS (priorizado por MoSCoW)
+
+### 🎯 Épicas
+
+- **EP01 - Gestión de Vacantes**
+- **EP02 - Gestión de Candidatos**
+- **EP03 - Colaboración y Feedback**
+- **EP04 - Experiencia del Candidato**
+- **EP05 - Administración del Sistema**
+- **EP06 - Automatización e IA**
+
+---
+
+### ✅ Must Have (Debe tener - MVP)
+
+#### US01 – Crear y publicar una vacante
+
+- **Descripción**: Como reclutador, quiero crear una nueva vacante y publicarla en varios portales desde un solo lugar.
+- **Tipo**: Feature
+- **Épica**: `EP01 - Gestión de Vacantes`
+
+---
+
+#### US02 – Ver y filtrar candidatos por criterios
+
+- **Descripción**: Como reclutador, quiero aplicar filtros para encontrar candidatos relevantes de manera rápida.
+- **Tipo**: Feature
+- **Épica**: `EP02 - Gestión de Candidatos`
+
+---
+
+#### US05 – Revisar candidatos y dejar feedback
+
+- **Descripción**: Como manager, quiero revisar los perfiles de los candidatos y dejar comentarios, para tomar decisiones colaborativas.
+- **Tipo**: Feature
+- **Épica**: `EP03 - Colaboración y Feedback`
+
+---
+
+#### US07 – Aplicar fácilmente a una vacante
+
+- **Descripción**: Como candidato, quiero postularme fácilmente usando mi CV o perfil de LinkedIn.
+- **Tipo**: Feature
+- **Épica**: `EP04 - Experiencia del Candidato`
+
+---
+
+#### US08 – Ver el estado de mi candidatura
+
+- **Descripción**: Como candidato, quiero consultar el estado de mis postulaciones para saber si sigo en el proceso.
+- **Tipo**: Feature
+- **Épica**: `EP04 - Experiencia del Candidato`
+
+---
+
+#### US10 – Invitar nuevos usuarios y asignar roles
+
+- **Descripción**: Como administrador, quiero poder invitar a miembros del equipo y asignarles roles.
+- **Tipo**: Feature
+- **Épica**: `EP05 - Administración del Sistema`
+
+---
+
+#### US13 – Filtrado automático con IA
+
+- **Descripción**: Como sistema, necesito filtrar automáticamente candidatos según criterios definidos usando IA.
+- **Tipo**: Technical / IA
+- **Épica**: `EP06 - Automatización e IA`
+
+---
+
+### 🟡 Should Have (Debería tener - versión posterior al MVP)
+
+#### US03 – Propuesta automática de entrevistas
+
+- **Descripción**: Como reclutador, quiero que el sistema proponga horarios automáticamente según disponibilidad.
+- **Tipo**: Feature
+- **Épica**: `EP06 - Automatización e IA`
+
+---
+
+#### US04 – Comentarios internos colaborativos
+
+- **Descripción**: Como reclutador, quiero dejar notas internas sobre los candidatos para que todo el equipo esté alineado.
+- **Tipo**: Feature
+- **Épica**: `EP03 - Colaboración y Feedback`
+
+---
+
+#### US06 – Ver estado general del proceso de vacante
+
+- **Descripción**: Como manager, quiero tener una visión clara del estado general del proceso de selección.
+- **Tipo**: Feature
+- **Épica**: `EP01 - Gestión de Vacantes`
+
+---
+
+#### US09 – Confirmar propuesta de entrevista
+
+- **Descripción**: Como candidato, quiero confirmar el horario de la entrevista sugerida por el sistema.
+- **Tipo**: Feature
+- **Épica**: `EP04 - Experiencia del Candidato`
+
+---
+
+#### US12 – Acceder a reportes y métricas
+
+- **Descripción**: Como administrador, quiero tener visibilidad de métricas clave del proceso de contratación.
+- **Tipo**: Feature
+- **Épica**: `EP05 - Administración del Sistema`
+
+---
+
+### 🔵 Could Have (Podría tener - si hay tiempo o recursos)
+
+#### US11 – Configurar canales externos de publicación
+
+- **Descripción**: Como administrador, quiero definir en qué portales se publican las vacantes.
+- **Tipo**: Feature
+- **Épica**: `EP05 - Administración del Sistema`
+
+---
+
+#### US14 – Proponer horarios óptimos con IA (versión avanzada)
+
+- **Descripción**: Como sistema, quiero usar IA avanzada para proponer los mejores horarios posibles de entrevista.
+- **Tipo**: Technical / IA
+- **Épica**: `EP06 - Automatización e IA`
+
+---
+
+### 🔴 Won’t Have (for now)
+
+_No se han identificado historias a excluir por ahora._
