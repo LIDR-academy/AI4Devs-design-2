@@ -1,0 +1,31 @@
+C4Context
+    title Diagrama de Contexto del Sistema ATS Innovador
+    
+    Person(reclutador, "Reclutador", "Profesional de RH que gestiona el proceso de selección")
+    Person(gerente, "Gerente Contratante", "Responsable del departamento que solicita la contratación")
+    Person(candidato, "Candidato", "Persona que aplica a una posición abierta")
+    Person(administrador, "Administrador del Sistema", "Gestiona configuraciones y permisos")
+    
+    System(ats, "Sistema ATS Innovador", "Plataforma integral de gestión del talento con inteligencia predictiva")
+    
+    System_Ext(bolsasTrabajo, "Bolsas de Trabajo", "Portales de empleo externos donde se publican vacantes")
+    System_Ext(hris, "Sistema HRIS", "Sistema de información de RH que gestiona empleados")
+    System_Ext(proveedorEmail, "Proveedor de Email", "Servicio para envío de comunicaciones")
+    System_Ext(proveedorSMS, "Proveedor de SMS", "Servicio para envío de mensajes de texto")
+    System_Ext(servicioCalendario, "Servicio de Calendario", "Plataforma de gestión de agendas y citas")
+    
+    Rel(reclutador, ats, "Gestiona vacantes, evalúa candidatos y administra procesos de selección")
+    Rel(gerente, ats, "Solicita contrataciones, participa en evaluación y toma decisiones finales")
+    Rel(candidato, ats, "Aplica a vacantes, realiza pruebas y proporciona documentación")
+    Rel(administrador, ats, "Configura el sistema, gestiona usuarios y monitoriza rendimiento")
+    
+    Rel(ats, bolsasTrabajo, "Publica vacantes y recibe aplicaciones", "APIs REST")
+    Rel(ats, hris, "Transfiere datos de nuevos empleados", "APIs REST/SOAP")
+    Rel(ats, proveedorEmail, "Envía notificaciones y comunicaciones", "SMTP/API")
+    Rel(ats, proveedorSMS, "Envía alertas y recordatorios", "API")
+    Rel(ats, servicioCalendario, "Programa entrevistas y eventos", "API")
+    
+    UpdateRelStyle(reclutador, ats, $textColor="black", $lineColor="#2563eb", $offsetY="-40")
+    UpdateRelStyle(gerente, ats, $textColor="black", $lineColor="#2563eb", $offsetX="-40")
+    UpdateRelStyle(candidato, ats, $textColor="black", $lineColor="#2563eb", $offsetY="40")
+    UpdateRelStyle(administrador, ats, $textColor="black", $lineColor="#2563eb", $offsetX="40")

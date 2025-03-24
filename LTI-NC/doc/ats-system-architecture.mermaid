@@ -1,0 +1,95 @@
+flowchart TB
+    subgraph "Capa de Presentación"
+        UI["Portal Web Responsive"]
+        MOBILE["Aplicación Móvil"]
+        API_GATEWAY["API Gateway"]
+    end
+    
+    subgraph "Capa de Microservicios"
+        direction LR
+        VAC_SVC["Servicio de\nGestión de Vacantes"]
+        CAN_SVC["Servicio de\nGestión de Candidatos"]
+        EVAL_SVC["Servicio de\nEvaluación y Selección"]
+        COMM_SVC["Servicio de\nComunicaciones"]
+        ONBOARD_SVC["Servicio de\nOnboarding"]
+        METRICS_SVC["Servicio de\nAnalítica y Reportes"]
+        IA_SVC["Servicio de\nInteligencia Predictiva"]
+    end
+    
+    subgraph "Capa de Datos"
+        direction LR
+        DB_MAIN[(Base de Datos\nPrincipal)]
+        DOC_STORE[(Almacenamiento\nde Documentos)]
+        ANALYTICS_DB[(Base de Datos\nAnalítica)]
+        CACHE["Caché\nDistribuida"]
+    end
+    
+    subgraph "Servicios Externos"
+        direction LR
+        JOB_BOARDS["Bolsas de\nTrabajo"]
+        EMAIL["Servicios\nde Email"]
+        SMS["Servicios\nde SMS"]
+        HRIS["Sistemas\nHRIS"]
+        CAL["Servicios de\nCalendario"]
+    end
+    
+    subgraph "Capa de Inteligencia"
+        IA_ENGINE["Motor IA\nPredictivo"]
+        ML_MODELS["Modelos de\nAprendizaje"]
+        NLP["Procesamiento de\nLenguaje Natural"]
+        IA_TRAINING["Sistema de\nEntrenamiento\nContinuo"]
+    end
+    
+    UI --> API_GATEWAY
+    MOBILE --> API_GATEWAY
+    
+    API_GATEWAY --> VAC_SVC
+    API_GATEWAY --> CAN_SVC
+    API_GATEWAY --> EVAL_SVC
+    API_GATEWAY --> COMM_SVC
+    API_GATEWAY --> ONBOARD_SVC
+    API_GATEWAY --> METRICS_SVC
+    
+    VAC_SVC --> DB_MAIN
+    CAN_SVC --> DB_MAIN
+    EVAL_SVC --> DB_MAIN
+    COMM_SVC --> DB_MAIN
+    ONBOARD_SVC --> DB_MAIN
+    METRICS_SVC --> ANALYTICS_DB
+    
+    CAN_SVC --> DOC_STORE
+    ONBOARD_SVC --> DOC_STORE
+    
+    VAC_SVC --> JOB_BOARDS
+    COMM_SVC --> EMAIL
+    COMM_SVC --> SMS
+    ONBOARD_SVC --> HRIS
+    EVAL_SVC --> CAL
+    
+    CAN_SVC --> IA_SVC
+    EVAL_SVC --> IA_SVC
+    METRICS_SVC --> IA_SVC
+    
+    IA_SVC --> IA_ENGINE
+    IA_ENGINE --> ML_MODELS
+    IA_ENGINE --> NLP
+    IA_ENGINE <--> IA_TRAINING
+    
+    METRICS_SVC --> IA_TRAINING
+    
+    VAC_SVC <--> CACHE
+    CAN_SVC <--> CACHE
+    EVAL_SVC <--> CACHE
+    METRICS_SVC <--> ANALYTICS_DB
+    
+    classDef presentation fill:#3498db,stroke:#333,stroke-width:1px,color:white;
+    classDef microservices fill:#2ecc71,stroke:#333,stroke-width:1px,color:white;
+    classDef data fill:#f39c12,stroke:#333,stroke-width:1px,color:white;
+    classDef external fill:#e74c3c,stroke:#333,stroke-width:1px,color:white;
+    classDef intelligence fill:#9b59b6,stroke:#333,stroke-width:1px,color:white;
+    
+    class UI,MOBILE,API_GATEWAY presentation;
+    class VAC_SVC,CAN_SVC,EVAL_SVC,COMM_SVC,ONBOARD_SVC,METRICS_SVC,IA_SVC microservices;
+    class DB_MAIN,DOC_STORE,ANALYTICS_DB,CACHE data;
+    class JOB_BOARDS,EMAIL,SMS,HRIS,CAL external;
+    class IA_ENGINE,ML_MODELS,NLP,IA_TRAINING intelligence;

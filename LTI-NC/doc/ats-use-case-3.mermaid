@@ -1,0 +1,56 @@
+sequenceDiagram
+    actor RH as Reclutador RH
+    actor MGR as Gerente Contratante
+    participant ATS as Sistema ATS
+    participant HRIS as Sistema HRIS
+    participant CAN as Candidato Seleccionado
+    participant LEGAL as Departamento Legal
+    
+    RH->>ATS: Marcar candidato como seleccionado
+    activate RH
+    activate ATS
+    ATS->>CAN: Enviar notificación de selección
+    CAN->>ATS: Confirmar aceptación de oferta
+    
+    ATS->>ATS: Iniciar proceso de onboarding
+    ATS->>CAN: Solicitar documentación necesaria
+    CAN->>ATS: Cargar documentos personales
+    
+    ATS->>LEGAL: Enviar documentos para verificación
+    activate LEGAL
+    LEGAL->>ATS: Confirmar validez de documentos
+    deactivate LEGAL
+    
+    ATS->>HRIS: Transferir datos del candidato
+    activate HRIS
+    HRIS-->>ATS: Confirmar creación de perfil empleado
+    deactivate HRIS
+    
+    ATS->>CAN: Enviar programa de inducción
+    ATS->>MGR: Notificar fecha de incorporación
+    activate MGR
+    
+    ATS->>ATS: Generar plan de capacitación inicial
+    ATS->>CAN: Compartir accesos preliminares
+    ATS->>MGR: Compartir perfil completo de nuevo empleado
+    
+    MGR->>ATS: Confirmar preparativos completados
+    deactivate MGR
+    
+    ATS->>HRIS: Activar ciclo de nómina
+    activate HRIS
+    HRIS-->>ATS: Confirmar integración completa
+    deactivate HRIS
+    
+    ATS->>RH: Notificar finalización del proceso
+    ATS->>ATS: Activar seguimiento post-incorporación
+    
+    loop Seguimiento 90 días
+        ATS->>CAN: Solicitar feedback de incorporación
+        ATS->>MGR: Solicitar evaluación de desempeño
+        ATS->>ATS: Actualizar métricas de calidad de contratación
+    end
+    
+    ATS-->>RH: Generar informe de efectividad del proceso
+    deactivate ATS
+    deactivate RH

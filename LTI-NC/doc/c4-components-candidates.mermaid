@@ -1,0 +1,57 @@
+C4Component
+    title Diagrama de Componentes: Servicio de Candidatos
+    
+    Container_Boundary(candidatosService, "Servicio de Candidatos") {
+        Component(candidatoController, "API Controller", "Spring RestController", "Expone endpoints REST para gestión de candidatos")
+        Component(candidatoManager, "Gestor de Candidatos", "Spring Service", "Coordina operaciones sobre candidatos y aplicaciones")
+        Component(perfilManager, "Gestor de Perfiles", "Spring Service", "Administra información de perfiles profesionales")
+        Component(aplicacionManager, "Gestor de Aplicaciones", "Spring Service", "Gestiona aplicaciones a vacantes")
+        Component(silverMedalistManager, "Gestor de Silver Medalists", "Spring Service", "Administra programa de candidatos destacados no seleccionados")
+        Component(documentManager, "Gestor de Documentos", "Spring Service", "Coordina almacenamiento y recuperación de documentos")
+        Component(iaClient, "Cliente IA", "REST Client", "Comunica con el servicio de IA para análisis predictivo")
+        Component(candidatoRepository, "Repositorio de Candidatos", "Spring Data JPA", "Capa de acceso a datos para candidatos")
+        Component(aplicacionRepository, "Repositorio de Aplicaciones", "Spring Data JPA", "Capa de acceso a datos para aplicaciones")
+        Component(documentClient, "Cliente de Documentos", "MongoDB Client", "Interfaz con la base de datos de documentos")
+        Component(cacheClient, "Cliente de Caché", "Redis Client", "Gestiona operaciones de caché")
+        Component(eventPublisher, "Publicador de Eventos", "Spring Events/Kafka", "Publica eventos de dominio para procesamiento asíncrono")
+    }
+    
+    Container(apiGateway, "API Gateway", "NodeJS", "Puerta de entrada unificada para todas las APIs")
+    Container(iaEngine, "Motor de IA", "Python", "Ejecuta modelos predictivos")
+    ContainerDb(mainDB, "Base de Datos Principal", "PostgreSQL", "Almacenamiento relacional")
+    ContainerDb(documentDB, "Almacén de Documentos", "MongoDB", "Almacenamiento de CVs y documentos")
+    Container(cache, "Caché Distribuida", "Redis", "Mejora rendimiento")
+    Container(eventBus, "Bus de Eventos", "Kafka", "Sistema de mensajería para eventos")
+    
+    Rel(apiGateway, candidatoController, "Realiza peticiones a", "JSON/HTTP")
+    
+    Rel(candidatoController, candidatoManager, "Utiliza")
+    Rel(candidatoController, perfilManager, "Utiliza")
+    Rel(candidatoController, aplicacionManager, "Utiliza")
+    Rel(candidatoController, silverMedalistManager, "Utiliza")
+    
+    Rel(candidatoManager, candidatoRepository, "Utiliza")
+    Rel(candidatoManager, documentManager, "Utiliza")
+    Rel(candidatoManager, iaClient, "Utiliza para scoring")
+    Rel(candidatoManager, cacheClient, "Utiliza")
+    Rel(candidatoManager, eventPublisher, "Publica eventos")
+    
+    Rel(perfilManager, candidatoRepository, "Utiliza")
+    Rel(perfilManager, documentManager, "Utiliza")
+    
+    Rel(aplicacionManager, aplicacionRepository, "Utiliza")
+    Rel(aplicacionManager, candidatoRepository, "Utiliza")
+    Rel(aplicacionManager, iaClient, "Utiliza para evaluación")
+    Rel(aplicacionManager, eventPublisher, "Publica eventos")
+    
+    Rel(silverMedalistManager, candidatoRepository, "Utiliza")
+    Rel(silverMedalistManager, aplicacionRepository, "Utiliza")
+    
+    Rel(documentManager, documentClient, "Utiliza")
+    
+    Rel(candidatoRepository, mainDB, "Lee/escribe", "SQL/JDBC")
+    Rel(aplicacionRepository, mainDB, "Lee/escribe", "SQL/JDBC")
+    Rel(documentClient, documentDB, "Lee/escribe", "MongoDB API")
+    Rel(cacheClient, cache, "Lee/escribe", "Redis API")
+    Rel(iaClient, iaEngine, "Solicita análisis", "gRPC")
+    Rel(eventPublisher, eventBus, "Publica mensajes", "Kafka Protocol")
