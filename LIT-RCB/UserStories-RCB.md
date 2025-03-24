@@ -1,5 +1,5 @@
 
-# 🧠 Documentación Técnica Robusta – MVP HawkeyeHire
+# 🧠 Documentación Técnica – MVP HawkeyeHire
 
 ---
 
