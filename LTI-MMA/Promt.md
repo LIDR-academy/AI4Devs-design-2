@@ -30,3 +30,6 @@ Tu misión es diseñar la primera versión del sistema, entregando los siguiente
 
 * genera un backlog unificado con ambas prioridades visibles en formato mardown
 
+* generame un ticket de trabajo para la userstory US01 - Crear y publicar una vacante
+
+* Estima el esfuerzo de los tickets de trabajo usando la metodología fibonacci y usa como unidad de medida horas

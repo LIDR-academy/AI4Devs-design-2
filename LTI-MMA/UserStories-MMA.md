@@ -579,3 +579,138 @@ Este backlog muestra todas las historias de usuario de LTI MMA, junto con su pri
 - Historias como **US11 y US14** tienen baja puntuación y baja prioridad ⇒ se pueden posponer para fases posteriores.
 
 ---
+
+## 🎟️ Ticket: US01 – Crear y publicar una vacante
+
+**Tipo:** Feature  
+**Prioridad:** Alta (Must Have / WSJF 5.6)  
+**Épica:** EP01 - Gestión de Vacantes  
+**Estado:** Por hacer  
+**Asignado a:** [A definir]  
+**Sprint:** MVP Sprint 1  
+
+---
+
+### 🧠 Descripción
+
+Como **reclutador**, quiero **crear una nueva vacante y publicarla en múltiples portales**, para **recibir candidatos lo antes posible** y gestionar el proceso desde una única plataforma.
+
+---
+
+### ✅ Criterios de Aceptación (AC)
+
+1. ✅ El reclutador puede acceder a una pantalla o modal de “Crear vacante”.
+2. ✅ Puede completar los siguientes campos obligatorios: título, descripción, tipo de contrato, ubicación, salario (opcional), área, y nivel de experiencia.
+3. ✅ Puede seleccionar los canales externos de publicación (ej: LinkedIn, InfoJobs, Web propia).
+4. ✅ Al guardar, la vacante se almacena en la base de datos y se muestra en el listado de vacantes activas.
+5. ✅ Si se seleccionaron canales externos, se inicia el proceso de publicación en esos portales vía API.
+6. ✅ El sistema muestra un mensaje de éxito o errores de validación al guardar.
+7. ✅ La vacante queda editable por parte del reclutador una vez creada.
+
+---
+
+### 🧪 Criterios de Validación Técnica
+
+- Los campos deben ser validados tanto en frontend como backend.
+- Las integraciones externas deben estar desacopladas (job async en segundo plano).
+- Debe existir un modelo `JobPosting` relacionado con `Company` y `User`.
+- Se debe registrar un log del evento de creación de vacante.
+
+---
+
+### 🧱 Tareas Técnicas (sub-tareas sugeridas)
+
+- [ ] Crear endpoint API REST para crear vacantes (`POST /api/vacancies/`)
+- [ ] Diseñar formulario en frontend (React/Vue) para capturar datos de la vacante
+- [ ] Validar campos requeridos en backend
+- [ ] Configurar relación entre `Vacancy`, `Company` y `User`
+- [ ] Implementar publicación simulada (mock) en portales externos
+- [ ] Añadir pruebas unitarias y de integración
+- [ ] Documentar en Swagger/Postman
+
+---
+
+### 🧩 Dependencias
+
+- US10 – Gestión de usuarios y roles (para saber si el usuario tiene permiso de publicar).
+- US11 – Configurar canales de publicación (opcional para MVP, pero si no está, usar canal por defecto).
+
+---
+
+### 📎 Recursos útiles
+
+- Diseño UI de formulario (Figma): _[Link si disponible]_
+- Docs de API externa para publicar vacantes: _[Link si disponible]_
+
+---
+
+## ⏱️ Estimación de Esfuerzo – US01: Crear y Publicar una Vacante
+
+> Método utilizado: **Fibonacci (adaptado a horas)**  
+> Unidad de medida: **Horas estimadas**
+
+---
+
+### 🎟️ Historia de Usuario
+
+**US01 – Crear y publicar una vacante**  
+**Como** reclutador  
+**Quiero** crear una nueva vacante y publicarla en múltiples portales  
+**Para** recibir candidatos lo antes posible y gestionarlo desde un solo lugar.
+
+---
+
+### 📐 Escala Fibonacci (adaptada a horas)
+
+Esta escala se usa para estimar el esfuerzo relativo de tareas en proyectos ágiles, con un rango de horas estimadas para cada punto.
+
+```markdown
+| Puntos Fibonacci | Rango de Horas Estimadas | Descripción                                  |
+|------------------|---------------------------|----------------------------------------------|
+| 1                | 1–2 horas                 | Tarea trivial o configuración mínima         |
+| 2                | 2–4 horas                 | Tarea sencilla, bien definida                |
+| 3                | 4–6 horas                 | Tarea con lógica intermedia                  |
+| 5                | 6–10 horas                | Tarea de jornada completa aproximadamente    |
+| 8                | 10–16 horas               | Tarea de hasta 2 días de trabajo             |
+| 13               | 16–24 horas               | Tarea compleja, implica varios componentes   |
+| 21               | 24–40 horas               | Tarea muy compleja, casi una épica           |
+````
+
+> ⚠️ Nota: esta tabla sirve como guía relativa. Las horas pueden ajustarse según la experiencia del equipo y el contexto técnico.
+
+---
+
+### 📋 Subtareas con estimación
+
+```markdown
+| Subtarea                                                                 | Puntos Fibonacci | Rango de Horas Estimadas |
+|--------------------------------------------------------------------------|------------------|---------------------------|
+| Crear endpoint API REST para crear vacantes (`POST /api/vacancies/`)     | 5                | 6–10 h                    |
+| Diseñar formulario en frontend para capturar datos                       | 3                | 4–6 h                     |
+| Validar campos requeridos en backend                                     | 2                | 2–4 h                     |
+| Configurar relación entre `Vacancy`, `Company` y `User`                  | 2                | 2–4 h                     |
+| Implementar publicación simulada en portales externos                    | 3                | 4–6 h                     |
+| Añadir pruebas unitarias y de integración                                | 5                | 6–10 h                    |
+| Documentar en Swagger/Postman                                            | 1                | 1–2 h                     |
+````
+
+---
+
+### 🧮 Estimación Total
+
+- **Total puntos**: `21` (equivalente a una tarea compleja)
+- **Rango total estimado**: `25–42 horas`
+- **Duración estimada**: `3 a 5 jornadas de desarrollo` (dependiendo del perfil)
+
+---
+
+### 👥 Sugerencia de asignación
+
+Este ticket puede dividirse entre:
+
+- 1 desarrollador backend
+- 1 desarrollador frontend
+
+**Objetivo**: entregar esta funcionalidad dentro del Sprint 1 del MVP.
+
+---
