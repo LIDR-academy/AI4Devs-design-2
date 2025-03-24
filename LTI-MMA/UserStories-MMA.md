@@ -145,6 +145,7 @@ Valores utilizados en escala relativa (Fibonacci): 1, 2, 3, 5, 8, 13
 
 ### 🏅 Historias Ordenadas por WSJF Score
 
+```markdown
 | Prioridad | ID    | Historia                                                                 | Valor Negocio | Urgencia | Reducción Riesgo | Tamaño | WSJF |
 |-----------|-------|--------------------------------------------------------------------------|----------------|----------|-------------------|--------|------|
 | 1         | US05  | Revisar candidatos y dejar feedback                                      | 9              | 6        | 6                 | 3      | 7.00 |
@@ -161,6 +162,7 @@ Valores utilizados en escala relativa (Fibonacci): 1, 2, 3, 5, 8, 13
 | 12        | US11  | Configurar canales de publicación externos                               | 4              | 3        | 4                 | 5      | 2.20 |
 | 13        | US12  | Reportes de rendimiento del equipo                                       | 5              | 4        | 5                 | 8      | 1.75 |
 | 14        | US14  | Proponer horarios óptimos de entrevista (algoritmo avanzado)            | 6              | 4        | 6                 | 13     | 1.23 |
+````
 
 ⸻
 
@@ -464,11 +466,13 @@ Acontinuacion comparamos los resultados de priorizar el backlog del sistema LTI 
 
 ### 🧠 Enfoques metodológicos
 
+```markdown
 | Criterio                | WSJF                                      | MoSCoW                                          |
 |-------------------------|-------------------------------------------|-------------------------------------------------|
 | Basado en...            | Cálculo de valor relativo y coste/tiempo | Clasificación por criticidad funcional          |
 | Objetivo principal      | Maximizar valor entregado en el menor tiempo posible | Definir qué es imprescindible en el MVP       |
 | Ideal para...           | Equipos con muchas iniciativas en backlog | Proyectos en fases tempranas (MVP, v1)          |
+```
 
 ---
 
@@ -476,6 +480,7 @@ Acontinuacion comparamos los resultados de priorizar el backlog del sistema LTI 
 
 #### 1. Orden de prioridad no coincide
 
+```markdown
 | Historia                                | Prioridad en WSJF | Prioridad en MoSCoW |
 |----------------------------------------|--------------------|----------------------|
 | US05 – Feedback colaborativo           | #1 (WSJF 7.0)      | Must Have           |
@@ -485,6 +490,7 @@ Acontinuacion comparamos los resultados de priorizar el backlog del sistema LTI 
 | US03 – Horarios automáticos            | #11 (WSJF 2.25)    | Should Have         |
 | US14 – Horarios óptimos con IA         | #14 (WSJF 1.23)    | Could Have          |
 | US12 – Reportes y métricas             | #13 (WSJF 1.75)    | Should Have         |
+```
 
 **Análisis**:
 
@@ -509,17 +515,67 @@ Acontinuacion comparamos los resultados de priorizar el backlog del sistema LTI 
 
 ### 🏁 Conclusión
 
+```markdown
 | Aspecto                  | WSJF                          | MoSCoW                       |
 |--------------------------|-------------------------------|------------------------------|
 | ¿Define MVP?             | No (requiere decisión externa)| Sí (Must Have es el MVP)     |
 | ¿Ordena toda la cola?    | Sí                            | Parcialmente                 |
 | ¿Evalúa esfuerzo?        | Sí                            | No                           |
 | ¿Fácil para stakeholders?| Más técnico                   | Más comprensible             |
+```
 
 ---
 
 ### ✅ Recomendación
 
 > Utilizar **MoSCoW para definir el alcance del MVP**, y luego aplicar **WSJF para ordenar la implementación dentro del MVP**, maximizando el valor por iteración.
+
+---
+
+## 📦 Backlog Unificado – LTI MMA (WSJF + MoSCoW)
+
+Este backlog muestra todas las historias de usuario de LTI MMA, junto con su prioridad tanto por **WSJF** como por **MoSCoW**, para tener una visión integral de valor vs. necesidad funcional.
+
+---
+
+### 🧩 Leyenda de Épicas
+
+- `EP01 - Gestión de Vacantes`
+- `EP02 - Gestión de Candidatos`
+- `EP03 - Colaboración y Feedback`
+- `EP04 - Experiencia del Candidato`
+- `EP05 - Administración del Sistema`
+- `EP06 - Automatización e IA`
+
+---
+
+### 🗂️ Backlog Detallado
+
+```markdown
+| ID    | Historia                                           | WSJF Score | MoSCoW     | Épica                      |
+|-------|----------------------------------------------------|------------|------------|-----------------------------|
+| US05  | Revisar candidatos y dejar feedback                | 7.00       | Must Have  | EP03 - Feedback             |
+| US01  | Crear y publicar una vacante                       | 5.60       | Must Have  | EP01 - Vacantes             |
+| US08  | Ver el estado de mi candidatura                    | 5.33       | Must Have  | EP04 - Experiencia          |
+| US02  | Ver y filtrar candidatos                           | 4.80       | Must Have  | EP02 - Candidatos           |
+| US04  | Comentarios internos colaborativos                 | 5.00       | Should Have| EP03 - Feedback             |
+| US07  | Aplicar a una vacante                              | 5.00       | Must Have  | EP04 - Experiencia          |
+| US09  | Confirmar entrevista sugerida                      | 4.67       | Should Have| EP04 - Experiencia          |
+| US10  | Invitar nuevos usuarios y roles                    | 3.60       | Must Have  | EP05 - Administración       |
+| US06  | Ver estado general de vacantes                     | 3.20       | Should Have| EP01 - Vacantes             |
+| US13  | Filtrado automático con IA                         | 3.13       | Must Have  | EP06 - IA                   |
+| US03  | Propuesta automática de entrevistas                | 2.25       | Should Have| EP06 - IA                   |
+| US11  | Configurar canales de publicación externos         | 2.20       | Could Have | EP05 - Administración       |
+| US12  | Reportes y métricas del sistema                    | 1.75       | Should Have| EP05 - Administración       |
+| US14  | IA avanzada para horarios óptimos                  | 1.23       | Could Have | EP06 - IA                   |
+```
+
+---
+
+### 🔍 Observaciones
+
+- Las historias **US05, US01, US08, US02** aparecen tanto con alta puntuación WSJF como en la categoría **Must Have** de MoSCoW ⇒ ideales para desarrollo temprano.
+- **US13 (IA básica)** tiene WSJF medio pero es Must Have por visión estratégica y diferenciación del producto.
+- Historias como **US11 y US14** tienen baja puntuación y baja prioridad ⇒ se pueden posponer para fases posteriores.
 
 ---
