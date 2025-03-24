@@ -1,0 +1,71 @@
+@startuml Caso de Uso - Onboarding Automatizado
+
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam linetype ortho
+
+actor "Nuevo\nEmpleado" as EMP
+actor "Reclutador" as REC
+actor "Gerente\nDirecto" as GER
+actor "Equipo\nde RRHH" as RRHH
+actor "Compañeros\nde Equipo" as EQP
+actor "Sistema LTI ATS" as SYS
+
+rectangle "Onboarding Automatizado" {
+  usecase "Iniciar proceso\nde onboarding" as UC1
+  usecase "Generar portal\npersonalizado" as UC2
+  usecase "Completar formularios\ndigitales" as UC3
+  usecase "Verificar\ndocumentación" as UC4
+  usecase "Generar solicitudes\nde aprovisionamiento" as UC5
+  usecase "Proporcionar plan\nde onboarding" as UC6
+  usecase "Programar reuniones\nintroductorias" as UC7
+  usecase "Acceder a materiales\nde capacitación" as UC8
+  usecase "Enviar verificaciones\nde progreso" as UC9
+  usecase "Recopilar feedback\ndel proceso" as UC10
+  usecase "Generar reporte\nde integración" as UC11
+  usecase "Identificar documentos\nfaltantes" as UC12
+  usecase "Notificar sobre\nproblemas documentales" as UC13
+  usecase "Adaptar plan para\nformato virtual" as UC14
+  usecase "Coordinar envío\nde equipos" as UC15
+  usecase "Recalcular cronograma\nde onboarding" as UC16
+}
+
+SYS --> UC1
+SYS --> UC2
+EMP --> UC3
+SYS --> UC4
+SYS --> UC5
+SYS --> UC6
+SYS --> UC7
+EMP --> UC8
+SYS --> UC9
+SYS --> UC10
+SYS --> UC11
+SYS --> UC12
+SYS --> UC13
+SYS --> UC14
+RRHH --> UC15
+SYS --> UC16
+
+GER --> UC6
+EQP --> UC7
+EMP --> UC10
+GER --> UC10
+
+UC1 ..> UC2 : <<include>>
+UC2 ..> UC3 : <<include>>
+UC3 ..> UC4 : <<include>>
+UC4 ..> UC5 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC6 ..> UC7 : <<include>>
+UC7 ..> UC8 : <<include>>
+UC8 ..> UC9 : <<include>>
+UC9 ..> UC10 : <<include>>
+UC10 ..> UC11 : <<include>>
+UC4 ..> UC12 : <<extend>>
+UC12 ..> UC13 : <<include>>
+UC14 ..> UC15 : <<include>>
+
+@enduml 

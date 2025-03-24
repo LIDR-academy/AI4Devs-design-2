@@ -1,0 +1,140 @@
+@startuml Diagrama Arquitectónico - LTI ATS
+
+!include <C4/C4_Container>
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/react.puml
+!include DEVICONS/nodejs.puml
+!include DEVICONS/python.puml
+!include DEVICONS/mongodb.puml
+!include DEVICONS/postgresql.puml
+!include DEVICONS/redis.puml
+!include FONTAWESOME/users.puml
+!include FONTAWESOME/user.puml
+!include FONTAWESOME/server.puml
+!include FONTAWESOME/cogs.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Arquitectura de Alto Nivel - LTI ATS
+
+Person(reclutador, "Reclutador", "Profesional de RRHH")
+Person(gerente, "Gerente de Contratación", "Líder de departamento")
+Person(candidato, "Candidato", "Aplicante a posición")
+Person(admin, "Administrador", "Administrador del sistema")
+
+System_Boundary(lti_ats, "LTI ATS") {
+    ' Capa de Presentación
+    Container(web_app, "Aplicación Web SPA", "React, TypeScript", "Interfaz principal para reclutadores y gerentes", $sprite="react")
+    Container(portal_candidatos, "Portal de Candidatos", "React, TypeScript", "Interfaz para candidatos", $sprite="react")
+    Container(mobile_app, "Aplicación Móvil", "React Native", "Versión móvil para reclutadores y gerentes")
+    
+    ' Capa de API
+    Container(api_gateway, "API Gateway", "Node.js, Express", "Punto de entrada para todas las solicitudes", $sprite="nodejs")
+    
+    ' Capa de Microservicios
+    Container(identity_service, "Servicio de Identidad", "Node.js, NestJS", "Gestiona autenticación y autorización", $sprite="nodejs")
+    Container(candidate_service, "Servicio de Candidatos", "Node.js, NestJS", "Gestiona perfiles y búsqueda de candidatos", $sprite="nodejs")
+    Container(job_service, "Servicio de Vacantes", "Node.js, NestJS", "Administra posiciones abiertas", $sprite="nodejs")
+    Container(workflow_service, "Servicio de Flujo de Trabajo", "Node.js, NestJS", "Orquesta procesos de contratación", $sprite="nodejs")
+    Container(communication_service, "Servicio de Comunicaciones", "Node.js, NestJS", "Gestiona comunicaciones", $sprite="nodejs")
+    Container(interview_service, "Servicio de Entrevistas", "Node.js, NestJS", "Coordina entrevistas", $sprite="nodejs")
+    Container(evaluation_service, "Servicio de Evaluación", "Node.js, NestJS", "Procesa evaluaciones", $sprite="nodejs")
+    Container(onboarding_service, "Servicio de Onboarding", "Node.js, NestJS", "Gestiona incorporación", $sprite="nodejs")
+    Container(analytics_service, "Servicio de Análisis", "Python, FastAPI", "Genera informes y métricas", $sprite="python")
+    Container(notification_service, "Servicio de Notificaciones", "Node.js, NestJS", "Gestiona alertas y notificaciones", $sprite="nodejs")
+    Container(integration_service, "Servicio de Integración", "Node.js, NestJS", "Conecta con sistemas externos", $sprite="nodejs")
+    
+    ' Capa de IA
+    Container(ai_engine, "Motor de IA", "Python, TensorFlow", "Proporciona capacidades de IA", $sprite="python")
+    
+    ' Capa de Eventos
+    Container(event_bus, "Bus de Eventos", "Apache Kafka", "Facilita comunicación asíncrona", $sprite="cogs")
+    
+    ' Capa de Datos
+    ContainerDb(relational_db, "Base de Datos Relacional", "PostgreSQL", "Almacena datos transaccionales", $sprite="postgresql")
+    ContainerDb(document_db, "Base de Datos Documental", "MongoDB", "Almacena perfiles y documentos", $sprite="mongodb")
+    ContainerDb(vector_db, "Base de Datos Vectorial", "Pinecone", "Optimizada para búsqueda semántica")
+    ContainerDb(cache_db, "Caché Distribuida", "Redis", "Datos de acceso frecuente", $sprite="redis")
+    ContainerDb(object_storage, "Almacenamiento de Objetos", "S3", "Documentos, CV, portafolios")
+    ContainerDb(data_warehouse, "Data Warehouse", "Snowflake", "Análisis y reportes")
+}
+
+' Sistemas Externos
+System_Ext(job_portals, "Portales de Empleo", "LinkedIn, Indeed, etc.")
+System_Ext(hris, "Sistemas HRIS", "Sistemas de información de RRHH")
+System_Ext(email, "Plataformas de Email", "Servicios de correo electrónico")
+System_Ext(calendar, "Sistemas de Calendario", "Para programación de entrevistas")
+System_Ext(verification, "Sistemas de Verificación", "Comprobación de antecedentes")
+System_Ext(payroll, "Sistemas de Nómina", "Para integración de empleados")
+
+' Relaciones - Usuarios a Interfaces
+Rel(reclutador, web_app, "Utiliza", "HTTPS")
+Rel(reclutador, mobile_app, "Utiliza", "HTTPS")
+Rel(gerente, web_app, "Utiliza", "HTTPS")
+Rel(gerente, mobile_app, "Utiliza", "HTTPS")
+Rel(candidato, portal_candidatos, "Utiliza", "HTTPS")
+Rel(admin, web_app, "Administra", "HTTPS")
+
+' Relaciones - Interfaces a API Gateway
+Rel(web_app, api_gateway, "Consume API", "HTTPS/JSON")
+Rel(portal_candidatos, api_gateway, "Consume API", "HTTPS/JSON")
+Rel(mobile_app, api_gateway, "Consume API", "HTTPS/JSON")
+
+' Relaciones - API Gateway a Servicios
+Rel(api_gateway, identity_service, "Autentica/Autoriza", "gRPC")
+Rel(api_gateway, candidate_service, "Enruta solicitudes", "gRPC")
+Rel(api_gateway, job_service, "Enruta solicitudes", "gRPC")
+Rel(api_gateway, workflow_service, "Enruta solicitudes", "gRPC")
+Rel(api_gateway, communication_service, "Enruta solicitudes", "gRPC")
+Rel(api_gateway, interview_service, "Enruta solicitudes", "gRPC")
+Rel(api_gateway, evaluation_service, "Enruta solicitudes", "gRPC")
+Rel(api_gateway, onboarding_service, "Enruta solicitudes", "gRPC")
+Rel(api_gateway, analytics_service, "Enruta solicitudes", "gRPC")
+Rel(api_gateway, notification_service, "Enruta solicitudes", "gRPC")
+
+' Relaciones - Servicios a Bus de Eventos
+Rel(candidate_service, event_bus, "Publica/Suscribe", "Eventos")
+Rel(job_service, event_bus, "Publica/Suscribe", "Eventos")
+Rel(workflow_service, event_bus, "Publica/Suscribe", "Eventos")
+Rel(communication_service, event_bus, "Publica/Suscribe", "Eventos")
+Rel(interview_service, event_bus, "Publica/Suscribe", "Eventos")
+Rel(evaluation_service, event_bus, "Publica/Suscribe", "Eventos")
+Rel(onboarding_service, event_bus, "Publica/Suscribe", "Eventos")
+Rel(notification_service, event_bus, "Suscribe", "Eventos")
+Rel(analytics_service, event_bus, "Suscribe", "Eventos")
+
+' Relaciones - Servicios a Bases de Datos
+Rel(candidate_service, document_db, "Lee/Escribe", "MongoDB Driver")
+Rel(candidate_service, vector_db, "Consulta", "API")
+Rel(job_service, relational_db, "Lee/Escribe", "SQL")
+Rel(workflow_service, relational_db, "Lee/Escribe", "SQL")
+Rel(communication_service, document_db, "Lee/Escribe", "MongoDB Driver")
+Rel(interview_service, relational_db, "Lee/Escribe", "SQL")
+Rel(evaluation_service, relational_db, "Lee/Escribe", "SQL")
+Rel(onboarding_service, relational_db, "Lee/Escribe", "SQL")
+Rel(analytics_service, data_warehouse, "Analiza", "SQL")
+Rel(identity_service, relational_db, "Lee/Escribe", "SQL")
+Rel(identity_service, cache_db, "Almacena sesiones", "Redis Client")
+
+' Relaciones - Servicios a Motor de IA
+Rel(candidate_service, ai_engine, "Utiliza", "API")
+Rel(job_service, ai_engine, "Utiliza", "API")
+Rel(evaluation_service, ai_engine, "Utiliza", "API")
+Rel(analytics_service, ai_engine, "Utiliza", "API")
+
+' Relaciones - Servicios a Sistemas Externos
+Rel(integration_service, job_portals, "Integra con", "API")
+Rel(integration_service, hris, "Integra con", "API")
+Rel(communication_service, email, "Envía a través de", "SMTP/API")
+Rel(interview_service, calendar, "Programa a través de", "API")
+Rel(onboarding_service, verification, "Verifica a través de", "API")
+Rel(onboarding_service, payroll, "Integra con", "API")
+
+' Almacenamiento de Objetos
+Rel(candidate_service, object_storage, "Almacena documentos", "API")
+Rel(evaluation_service, object_storage, "Almacena archivos", "API")
+Rel(interview_service, object_storage, "Almacena grabaciones", "API")
+
+@enduml 
