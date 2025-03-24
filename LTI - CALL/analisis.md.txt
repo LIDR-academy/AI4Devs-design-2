@@ -1,0 +1,430 @@
+###Diagramas
+
+###diagrama lean canvas
+graph TB
+    subgraph "Gestión de Ofertas Laborales"
+        A1[Problema] --> A2[Los equipos de RRHH necesitan\ncentralizar y agilizar la\ncreación y gestión de vacantes]
+        A3[Solución] --> A4[Sistema para crear, editar\ny publicar ofertas laborales\ncon flujos de aprobación]
+        A5[Propuesta de Valor] --> A6[Reducción del 40% en tiempo\nde publicación de ofertas\ny alcance a más candidatos]
+        A7[Métricas Clave] --> A8[- Número de ofertas publicadas\n- Tiempo promedio de aprobación\n- Tasa de conversión por canal]
+        A9[Canales] --> A10[- Portal de carreras propio\n- Bolsas de trabajo\n- Redes sociales laborales]
+    end
+
+    subgraph "Pipeline de Contratación"
+        B1[Problema] --> B2[Dificultad para realizar\nseguimiento estructurado\ndel proceso de selección]
+        B3[Solución] --> B4[Sistema Kanban personalizable\ncon etapas configurables y\nflujos automatizados]
+        B5[Propuesta de Valor] --> B6[Visibilidad completa del\nprogreso de candidatos y\nreducción de errores en 60%]
+        B7[Métricas Clave] --> B8[- Tiempo en cada etapa\n- Ratio de conversión por fase\n- Tasa de abandono]
+        B9[Canales] --> B10[- Dashboard para reclutadores\n- Notificaciones automáticas\n- Reportes para stakeholders]
+    end
+
+    subgraph "Evaluación de Candidatos"
+        C1[Problema] --> C2[Evaluación inconsistente\ny pérdida de información\ncrítica sobre candidatos]
+        C3[Solución] --> C4[Formularios estructurados de\nevaluación y sistema colaborativo\nde puntuación y comentarios]
+        C5[Propuesta de Valor] --> C6[Decisiones de contratación\nbasadas en datos y reducción\nde sesgos en el proceso]
+        C7[Métricas Clave] --> C8[- Puntuaciones promedio\n- Correlación entre evaluaciones\n- Precisión de predicción]
+        C9[Canales] --> C10[- Formularios móviles/web\n- Integraciones con videoconferencia\n- Recordatorios automáticos]
+    end
+
+
+###casos de uso
+@startuml "Caso de Uso: Gestión de Ofertas Laborales"
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+
+actor "Reclutador" as recruiter
+actor "Gerente de Contratación" as manager
+actor "Candidato" as candidate
+actor "Sistema de Publicación" as pubSystem
+
+rectangle "Sistema ATS" {
+  usecase "Crear Oferta Laboral" as UC1
+  usecase "Editar Oferta Laboral" as UC2
+  usecase "Aprobar Oferta Laboral" as UC3
+  usecase "Publicar Oferta" as UC4
+  usecase "Ver Ofertas Publicadas" as UC5
+  
+  recruiter --> UC1
+  recruiter --> UC2
+  manager --> UC3
+  UC3 ..> UC4 : <<include>>
+  UC4 --> pubSystem
+  candidate --> UC5
+}
+
+note right of UC1
+  El reclutador ingresa detalles de la posición:
+  - Título del puesto
+  - Descripción
+  - Requisitos
+  - Ubicación
+  - Tipo de contrato
+  - Rango salarial
+end note
+
+note right of UC3
+  Requiere revisión y aprobación
+  por parte del gerente antes
+  de ser publicada
+end note
+@enduml
+
+@startuml "Caso de Uso: Pipeline de Contratación"
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+skinparam sequenceArrowThickness 2
+skinparam noteBackgroundColor #FFFFCC
+
+actor "Candidato" as candidate
+actor "Reclutador" as recruiter
+actor "Entrevistador" as interviewer
+
+rectangle "Sistema ATS" {
+  usecase "Recibir Solicitud" as UC1
+  usecase "Revisar Candidato" as UC2
+  usecase "Mover Candidato en Pipeline" as UC3
+  usecase "Programar Entrevista" as UC4
+  usecase "Enviar Comunicación" as UC5
+  
+  candidate --> UC1
+  recruiter --> UC2
+  UC2 ..> UC3 : <<include>>
+  recruiter --> UC3
+  UC3 ..> UC4 : <<extend>>
+  UC3 ..> UC5 : <<include>>
+  interviewer --> UC4
+}
+
+note right of UC3
+  El pipeline tiene etapas definidas:
+  1. Aplicación Recibida
+  2. Revisión de CV
+  3. Entrevista Inicial
+  4. Entrevista Técnica
+  5. Entrevista Final
+  6. Oferta
+  7. Contratado/Rechazado
+end note
+@enduml
+
+@startuml "Caso de Uso: Evaluación de Candidatos"
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam usecaseBorderColor #999999
+
+actor "Entrevistador" as interviewer
+actor "Gerente de Contratación" as manager
+actor "Equipo de Contratación" as team
+
+rectangle "Sistema ATS" {
+  usecase "Completar Formulario de Evaluación" as UC1
+  usecase "Asignar Puntuación" as UC2
+  usecase "Agregar Comentarios" as UC3
+  usecase "Revisar Evaluaciones" as UC4
+  usecase "Comparar Candidatos" as UC5
+  
+  interviewer --> UC1
+  UC1 ..> UC2 : <<include>>
+  UC1 ..> UC3 : <<include>>
+  manager --> UC4
+  team --> UC4
+  manager --> UC5
+  UC4 ..> UC5 : <<extend>>
+}
+
+note right of UC1
+  Los formularios incluyen:
+  - Evaluación de habilidades técnicas
+  - Evaluación de habilidades blandas
+  - Ajuste cultural
+  - Potencial de crecimiento
+  - Recomendación final
+end note
+
+note right of UC5
+  Permite visualizar y comparar
+  evaluaciones de múltiples candidatos
+  para una misma posición
+end note
+@enduml
+
+####Arquitectura alto nivel
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 700">
+  <!-- Background -->
+  <rect width="950" height="700" fill="#f9f9f9"/>
+  
+  <!-- AWS Cloud Border -->
+  <rect x="10" y="90" width="930" height="600" rx="15" ry="15" fill="#F8F8F8" stroke="#FF9900" stroke-width="2" stroke-dasharray="10,5"/>
+  <text x="30" y="120" font-family="Arial" font-size="18" fill="#232F3E">AWS Cloud</text>
+  
+  <!-- Frontend -->
+  <rect x="40" y="150" width="180" height="100" rx="10" ry="10" fill="#E8E8FF" stroke="#6C63FF" stroke-width="2"/>
+  <text x="130" y="195" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">Frontend</text>
+  <text x="130" y="215" font-family="Arial" font-size="12" text-anchor="middle" fill="#666">React / Vue.js en S3</text>
+  <text x="130" y="235" font-family="Arial" font-size="12" text-anchor="middle" fill="#666">CloudFront CDN</text>
+  
+  <!-- API Gateway -->
+  <polygon points="310,150 390,150 430,200 390,250 310,250 270,200" fill="#F0E68C" stroke="#B8860B" stroke-width="2"/>
+  <text x="350" y="205" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">API Gateway</text>
+  
+  <!-- Microservicio: Gestión de Ofertas Laborales -->
+  <g transform="translate(150, 320)">
+    <!-- Hexágono exterior (dominio) -->
+    <polygon points="0,70 60,0 180,0 240,70 180,140 60,140" fill="#E1F5FE" stroke="#0288D1" stroke-width="2"/>
+    
+    <!-- Hexágono interior (aplicación) -->
+    <polygon points="40,70 80,30 160,30 200,70 160,110 80,110" fill="#FFFFFF" stroke="#0288D1" stroke-width="2"/>
+    
+    <!-- Título del microservicio -->
+    <text x="120" y="20" font-family="Arial" font-size="14" text-anchor="middle" fill="#0288D1" font-weight="bold">MS: Gestión de Ofertas</text>
+    
+    <!-- Puertos y adaptadores -->
+    <circle cx="20" cy="70" r="10" fill="#FF5722" stroke="#BF360C" stroke-width="1"/>
+    <circle cx="220" cy="70" r="10" fill="#4CAF50" stroke="#1B5E20" stroke-width="1"/>
+    <circle cx="80" cy="140" r="10" fill="#9C27B0" stroke="#4A148C" stroke-width="1"/>
+    <circle cx="160" cy="140" r="10" fill="#9C27B0" stroke="#4A148C" stroke-width="1"/>
+    
+    <!-- Texto en centro -->
+    <text x="120" y="75" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Core Domain</text>
+  </g>
+  
+  <!-- Microservicio: Pipeline de Contratación -->
+  <g transform="translate(450, 320)">
+    <!-- Hexágono exterior (dominio) -->
+    <polygon points="0,70 60,0 180,0 240,70 180,140 60,140" fill="#E8F5E9" stroke="#388E3C" stroke-width="2"/>
+    
+    <!-- Hexágono interior (aplicación) -->
+    <polygon points="40,70 80,30 160,30 200,70 160,110 80,110" fill="#FFFFFF" stroke="#388E3C" stroke-width="2"/>
+    
+    <!-- Título del microservicio -->
+    <text x="120" y="20" font-family="Arial" font-size="14" text-anchor="middle" fill="#388E3C" font-weight="bold">MS: Pipeline Contratación</text>
+    
+    <!-- Puertos y adaptadores -->
+    <circle cx="20" cy="70" r="10" fill="#FF5722" stroke="#BF360C" stroke-width="1"/>
+    <circle cx="220" cy="70" r="10" fill="#4CAF50" stroke="#1B5E20" stroke-width="1"/>
+    <circle cx="80" cy="140" r="10" fill="#9C27B0" stroke="#4A148C" stroke-width="1"/>
+    <circle cx="160" cy="140" r="10" fill="#9C27B0" stroke="#4A148C" stroke-width="1"/>
+    
+    <!-- Texto en centro -->
+    <text x="120" y="75" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Core Domain</text>
+  </g>
+  
+  <!-- Microservicio: Evaluación de Candidatos -->
+  <g transform="translate(750, 320)">
+    <!-- Hexágono exterior (dominio) -->
+    <polygon points="0,70 60,0 180,0 240,70 180,140 60,140" fill="#EDE7F6" stroke="#673AB7" stroke-width="2"/>
+    
+    <!-- Hexágono interior (aplicación) -->
+    <polygon points="40,70 80,30 160,30 200,70 160,110 80,110" fill="#FFFFFF" stroke="#673AB7" stroke-width="2"/>
+    
+    <!-- Título del microservicio -->
+    <text x="120" y="20" font-family="Arial" font-size="14" text-anchor="middle" fill="#673AB7" font-weight="bold">MS: Evaluación Candidatos</text>
+    
+    <!-- Puertos y adaptadores -->
+    <circle cx="20" cy="70" r="10" fill="#FF5722" stroke="#BF360C" stroke-width="1"/>
+    <circle cx="220" cy="70" r="10" fill="#4CAF50" stroke="#1B5E20" stroke-width="1"/>
+    <circle cx="80" cy="140" r="10" fill="#9C27B0" stroke="#4A148C" stroke-width="1"/>
+    <circle cx="160" cy="140" r="10" fill="#9C27B0" stroke="#4A148C" stroke-width="1"/>
+    
+    <!-- Texto en centro -->
+    <text x="120" y="75" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Core Domain</text>
+  </g>
+  
+  <!-- Bases de datos -->
+  <g transform="translate(170, 500)">
+    <path d="M0,15 C0,5 40,5 40,15 L40,45 C40,55 0,55 0,45 Z" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+    <path d="M0,15 C0,25 40,25 40,15" fill="none" stroke="#1565C0" stroke-width="2"/>
+    <text x="20" y="35" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">DB Ofertas</text>
+    <text x="20" y="75" font-family="Arial" font-size="10" text-anchor="middle" fill="#666">RDS Aurora</text>
+  </g>
+  
+  <g transform="translate(470, 500)">
+    <path d="M0,15 C0,5 40,5 40,15 L40,45 C40,55 0,55 0,45 Z" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+    <path d="M0,15 C0,25 40,25 40,15" fill="none" stroke="#2E7D32" stroke-width="2"/>
+    <text x="20" y="35" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">DB Pipeline</text>
+    <text x="20" y="75" font-family="Arial" font-size="10" text-anchor="middle" fill="#666">DynamoDB</text>
+  </g>
+  
+  <g transform="translate(770, 500)">
+    <path d="M0,15 C0,5 40,5 40,15 L40,45 C40,55 0,55 0,45 Z" fill="#EDE7F6" stroke="#4527A0" stroke-width="2"/>
+    <path d="M0,15 C0,25 40,25 40,15" fill="none" stroke="#4527A0" stroke-width="2"/>
+    <text x="20" y="35" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">DB Evaluación</text>
+    <text x="20" y="75" font-family="Arial" font-size="10" text-anchor="middle" fill="#666">MongoDB Atlas</text>
+  </g>
+  
+  <!-- Event Bus -->
+  <rect x="270" y="600" width="400" height="40" rx="5" ry="5" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="470" y="625" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Amazon EventBridge / SNS / SQS</text>
+  
+  <!-- Líneas de conexión -->
+  <!-- Frontend a API Gateway -->
+  <line x1="220" y1="200" x2="270" y2="200" stroke="#666" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- API Gateway a microservicios -->
+  <line x1="350" y1="250" x2="250" y2="320" stroke="#666" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="350" y1="250" x2="550" y2="320" stroke="#666" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="350" y1="250" x2="850" y2="320" stroke="#666" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- Microservicios a bases de datos -->
+  <line x1="250" y1="460" x2="190" y2="500" stroke="#1565C0" stroke-width="2"/>
+  <line x1="550" y1="460" x2="490" y2="500" stroke="#2E7D32" stroke-width="2"/>
+  <line x1="850" y1="460" x2="790" y2="500" stroke="#4527A0" stroke-width="2"/>
+  
+  <!-- Microservicios a Event Bus -->
+  <line x1="250" y1="460" x2="350" y2="600" stroke="#FF9800" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="550" y1="460" x2="470" y2="600" stroke="#FF9800" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="850" y1="460" x2="590" y2="600" stroke="#FF9800" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- Leyenda -->
+  <rect x="700" y="140" width="200" height="150" rx="5" ry="5" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1"/>
+  <text x="800" y="160" font-family="Arial" font-size="14" text-anchor="middle" fill="#333" font-weight="bold">Leyenda</text>
+  
+  <circle cx="715" cy="180" r="5" fill="#FF5722" stroke="#BF360C" stroke-width="1"/>
+  <text x="805" y="185" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Puerto Primario (API)</text>
+  
+  <circle cx="715" cy="205" r="5" fill="#4CAF50" stroke="#1B5E20" stroke-width="1"/>
+  <text x="805" y="210" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Puerto Secundario (DB)</text>
+  
+  <circle cx="715" cy="230" r="5" fill="#9C27B0" stroke="#4A148C" stroke-width="1"/>
+  <text x="805" y="235" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Puerto Eventos</text>
+  
+  <line x1="715" y1="255" x2="735" y2="255" stroke="#666" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="805" y="260" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Comunicación REST</text>
+  
+  <line x1="715" y1="280" x2="735" y2="280" stroke="#FF9800" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="805" y="285" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Eventos Asincrónicos</text>
+  
+  <!-- Título del diagrama -->
+  <text x="475" y="50" font-family="Arial" font-size="24" text-anchor="middle" fill="#333" font-weight="bold">Arquitectura Hexagonal de Microservicios para ATS</text>
+  <text x="475" y="75" font-family="Arial" font-size="16" text-anchor="middle" fill="#666">Implementación en AWS</text>
+</svg>
+
+##### diagrama c4
+
+@startuml "C4 - Arquitectura ATS en AWS"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+' Define some custom tags
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v10.0/dist
+!include AWSPuml/AWSCommon.puml
+!include AWSPuml/InternetOfThings/IoTGeneric.puml
+!include AWSPuml/General/User.puml
+!include AWSPuml/NetworkingContentDelivery/CloudFront.puml
+!include AWSPuml/Storage/SimpleStorageService.puml
+!include AWSPuml/ApplicationIntegration/APIGateway.puml
+!include AWSPuml/Database/DynamoDB.puml
+!include AWSPuml/Database/Database.puml
+!include AWSPuml/Database/Aurora.puml
+!include AWSPuml/ApplicationIntegration/EventBridge.puml
+!include AWSPuml/ApplicationIntegration/SimpleNotificationService.puml
+!include AWSPuml/ApplicationIntegration/SimpleQueueService.puml
+
+' Define colors
+!define DOMAIN_COLOR #7CB3E0
+!define PRIMARY_PORT_COLOR #FF5722
+!define SECONDARY_PORT_COLOR #4CAF50
+!define EVENT_PORT_COLOR #9C27B0
+
+LAYOUT_WITH_LEGEND()
+
+' Actors
+Person(recruiter, "Reclutador", "Gestiona ofertas y candidatos")
+Person(candidate, "Candidato", "Aplica a ofertas de trabajo")
+Person(interviewer, "Entrevistador", "Evalúa candidatos")
+
+' Context
+System_Boundary(ats, "Sistema ATS") {
+    ' Containers
+    Container(spa, "SPA Frontend", "React/Vue.js", "Interfaz de usuario para todos los usuarios", $sprite="CloudFront")
+    Container(api_gateway, "API Gateway", "Amazon API Gateway", "Puerta de entrada a los microservicios", $sprite="APIGateway")
+    
+    ' Job Postings Microservice
+    System_Boundary(job_postings_ms, "Microservicio: Gestión de Ofertas") {
+        ' Components with hexagonal architecture
+        Component(job_domain, "Dominio de Ofertas", "Core Domain", "Contiene la lógica de negocio para ofertas laborales", $tags="DOMAIN_COLOR")
+        Component(job_api, "API Controller", "API REST", "Expone endpoints para gestión de ofertas", $tags="PRIMARY_PORT_COLOR")
+        Component(job_repo, "Repositorio", "Adaptador de persistencia", "Maneja operaciones CRUD para ofertas", $tags="SECONDARY_PORT_COLOR")
+        Component(job_events, "Publicador de Eventos", "Adaptador de eventos", "Publica eventos de cambio en ofertas", $tags="EVENT_PORT_COLOR")
+        
+        ' Database
+        ContainerDb(job_db, "Base de Datos Ofertas", "Amazon Aurora", "Almacena ofertas laborales y sus metadatos", $sprite="Aurora")
+    }
+    
+    ' Hiring Pipeline Microservice
+    System_Boundary(pipeline_ms, "Microservicio: Pipeline de Contratación") {
+        ' Components with hexagonal architecture
+        Component(pipeline_domain, "Dominio de Pipeline", "Core Domain", "Gestiona el flujo de candidatos", $tags="DOMAIN_COLOR")
+        Component(pipeline_api, "API Controller", "API REST", "Control de estado y transiciones", $tags="PRIMARY_PORT_COLOR")
+        Component(pipeline_repo, "Repositorio", "Adaptador de persistencia", "Maneja estados y transiciones", $tags="SECONDARY_PORT_COLOR")
+        Component(pipeline_events, "Gestor de Eventos", "Adaptador de eventos", "Publica/suscribe eventos de cambio de estado", $tags="EVENT_PORT_COLOR")
+        
+        ' Database
+        ContainerDb(pipeline_db, "Base de Datos Pipeline", "Amazon DynamoDB", "Almacena estado de candidatos", $sprite="DynamoDB")
+    }
+    
+    ' Candidate Evaluation Microservice
+    System_Boundary(evaluation_ms, "Microservicio: Evaluación de Candidatos") {
+        ' Components with hexagonal architecture
+        Component(eval_domain, "Dominio de Evaluación", "Core Domain", "Lógica de evaluación de candidatos", $tags="DOMAIN_COLOR")
+        Component(eval_api, "API Controller", "API REST", "Endpoints para evaluaciones", $tags="PRIMARY_PORT_COLOR")
+        Component(eval_repo, "Repositorio", "Adaptador de persistencia", "Maneja evaluaciones y formularios", $tags="SECONDARY_PORT_COLOR")
+        Component(eval_events, "Gestor de Eventos", "Adaptador de eventos", "Notifica cambios en evaluaciones", $tags="EVENT_PORT_COLOR")
+        
+        ' Database
+        ContainerDb(eval_db, "Base de Datos Evaluación", "MongoDB Atlas", "Almacena evaluaciones y feedback", $sprite="Database")
+    }
+    
+    ' Event Bus
+    Container(event_bus, "Event Bus", "Amazon EventBridge", "Gestiona eventos entre microservicios", $sprite="EventBridge")
+}
+
+' External Systems
+System_Ext(job_boards, "Portales de Empleo", "Sistemas externos donde publicar ofertas")
+System_Ext(email_system, "Sistema de Email", "Servicio de envío de emails")
+System_Ext(calendar_system, "Sistema de Calendario", "Servicio de agendamiento")
+
+' Relationships - Context
+Rel(recruiter, spa, "Utiliza", "HTTPS")
+Rel(candidate, spa, "Utiliza", "HTTPS")
+Rel(interviewer, spa, "Utiliza", "HTTPS")
+Rel(spa, api_gateway, "Consume APIs", "HTTPS/JSON")
+
+' Relationships - API Gateway
+Rel(api_gateway, job_api, "Dirige peticiones", "HTTPS/JSON")
+Rel(api_gateway, pipeline_api, "Dirige peticiones", "HTTPS/JSON")
+Rel(api_gateway, eval_api, "Dirige peticiones", "HTTPS/JSON")
+
+' Relationships - Job Postings
+Rel(job_api, job_domain, "Usa")
+Rel(job_domain, job_repo, "Usa")
+Rel(job_repo, job_db, "Lee/Escribe", "SQL")
+Rel(job_domain, job_events, "Publica eventos")
+Rel(job_events, event_bus, "Publica a")
+
+' Relationships - Hiring Pipeline
+Rel(pipeline_api, pipeline_domain, "Usa")
+Rel(pipeline_domain, pipeline_repo, "Usa")
+Rel(pipeline_repo, pipeline_db, "Lee/Escribe", "DynamoDB API")
+Rel(pipeline_domain, pipeline_events, "Publica/Suscribe eventos")
+Rel(pipeline_events, event_bus, "Publica/Suscribe a")
+
+' Relationships - Candidate Evaluation
+Rel(eval_api, eval_domain, "Usa")
+Rel(eval_domain, eval_repo, "Usa")
+Rel(eval_repo, eval_db, "Lee/Escribe", "MongoDB API")
+Rel(eval_domain, eval_events, "Publica eventos")
+Rel(eval_events, event_bus, "Publica a")
+
+' Relationships - External Systems
+Rel(job_events, job_boards, "Publica ofertas", "APIs")
+Rel(pipeline_events, email_system, "Envía notificaciones", "SMTP")
+Rel(pipeline_events, calendar_system, "Agenda entrevistas", "API")
+
+@enduml
