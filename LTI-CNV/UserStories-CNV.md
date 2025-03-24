@@ -2,117 +2,112 @@
 # ------------- USER STORIES ------------- ###
 
 
-1. Filtrado de Candidatos
-User Story
+# 1. Filtrado de Candidatos
 
-Como Reclutador, quiero filtrar candidatos por palabras clave, ubicación y experiencia para encontrar rápidamente a los más adecuados para la vacante.
+## User Story
 
-Descripción
+**Como Reclutador**, quiero filtrar candidatos por palabras clave, ubicación y experiencia para encontrar rápidamente a los más adecuados para la vacante.
+
+## Descripción
+
 El reclutador dispondrá de una sección o panel donde pueda aplicar filtros avanzados (por ejemplo, años de experiencia, palabras clave, ubicación). De esta manera, podrá reducir la lista de candidatos y centrarse en los que mejor encajan con los requisitos de la oferta.
 
-Criterios de Aceptación
+## Criterios de Aceptación
 
-Dado que el reclutador se encuentra en la lista de candidatos,
-cuando aplique uno o varios filtros (por ejemplo, "Java", "3 años de experiencia", "Madrid"),
-entonces el sistema mostrará únicamente los candidatos que cumplan con todos esos criterios.
+- **Dado** que el reclutador se encuentra en la lista de candidatos,  
+  **cuando** aplique uno o varios filtros (por ejemplo, "Java", "3 años de experiencia", "Madrid"),  
+  **entonces** el sistema mostrará únicamente los candidatos que cumplan con todos esos criterios.
 
-Dado que existan más de 100 candidatos,
-cuando el reclutador aplique filtros y pagine la lista,
-entonces se deberá mostrar la paginación y el número total de resultados filtrados.
+- **Dado** que existan más de 100 candidatos,  
+  **cuando** el reclutador aplique filtros y pagine la lista,  
+  **entonces** se deberá mostrar la paginación y el número total de resultados filtrados.
 
-Notas Adicionales
+## Notas Adicionales
 
-Se recomienda implementar paginación y ordenamiento para un rendimiento óptimo en grandes volúmenes de datos.
+- Se recomienda implementar paginación y ordenamiento para un rendimiento óptimo en grandes volúmenes de datos.
+- Los filtros deben poder combinarse (palabra clave + ubicación + experiencia).
 
-Los filtros deben poder combinarse (palabra clave + ubicación + experiencia).
+## Tareas
 
-Tareas
+- **Diseño de UI:** Crear la interfaz de filtrado (campos, menús desplegables, etc.).
+- **Implementación de lógica:** Ajustar el endpoint de búsqueda en la API para recibir parámetros de filtrado.
+- **Validar resultados:** Asegurar que la API devuelva solo los candidatos que cumplan los criterios.
+- **Paginación:** Implementar paginación y ordenamiento en el resultado.
+- **Pruebas:** Realizar pruebas de carga y funcionales con distintos volúmenes de datos.
 
-Diseño de UI: Crear la interfaz de filtrado (campos, menús desplegables, etc.).
+---
 
-Implementación de lógica: Ajustar el endpoint de búsqueda en la API para recibir parámetros de filtrado.
+# 2. Programación de Entrevistas
 
-Validar resultados: Asegurar que la API devuelva solo los candidatos que cumplan los criterios.
+## User Story
 
-Paginación: Implementar paginación y ordenamiento en el resultado.
+**Como Reclutador**, quiero programar entrevistas con los candidatos preseleccionados para evaluarlos personalmente.
 
-Pruebas: Realizar pruebas de carga y funcionales con distintos volúmenes de datos.
+## Descripción
 
-2. Programación de Entrevistas
-User Story
-
-Como Reclutador, quiero programar entrevistas con los candidatos preseleccionados para evaluarlos personalmente.
-
-Descripción
 El reclutador selecciona a los candidatos que han superado la fase inicial y programa la entrevista indicando fecha, hora y modalidad (virtual o presencial). El sistema envía invitaciones al candidato y al entrevistador, y registra la información de la entrevista en el perfil de la candidatura.
 
-Criterios de Aceptación
+## Criterios de Aceptación
 
-Dado que el reclutador está en la pantalla de detalle de un candidato preseleccionado,
-cuando programe la entrevista indicando fecha, hora y modalidad,
-entonces el sistema creará el evento y enviará notificaciones (correo o SMS) tanto al candidato como al entrevistador.
+- **Dado** que el reclutador está en la pantalla de detalle de un candidato preseleccionado,  
+  **cuando** programe la entrevista indicando fecha, hora y modalidad,  
+  **entonces** el sistema creará el evento y enviará notificaciones (correo o SMS) tanto al candidato como al entrevistador.
 
-Dado que se haya programado una entrevista,
-cuando falten 24 horas para la cita,
-entonces el sistema enviará un recordatorio automático a ambas partes (si está configurado).
+- **Dado** que se haya programado una entrevista,  
+  **cuando** falten 24 horas para la cita,  
+  **entonces** el sistema enviará un recordatorio automático a ambas partes (si está configurado).
 
-Notas Adicionales
+## Notas Adicionales
 
-Puede integrarse con calendarios externos (Google, Outlook) para sincronizar la cita.
+- Puede integrarse con calendarios externos (Google, Outlook) para sincronizar la cita.
+- Se deben contemplar recordatorios automáticos (24h, 2h antes) y la posibilidad de reprogramar o cancelar.
 
-Se deben contemplar recordatorios automáticos (24h, 2h antes) y la posibilidad de reprogramar o cancelar.
+## Tareas
 
-Tareas
+- **Formulario de entrevista:** Diseñar la interfaz para introducir fecha, hora y modalidad.
+- **Persistencia:** Guardar la información de la entrevista (Interview Entity) en la base de datos.
+- **Notificaciones:** Integrar con el servicio de mensajería para enviar invitaciones y recordatorios.
+- **Integración con calendarios (opcional):** Implementar la sincronización si se requiere.
+- **Pruebas de usabilidad:** Verificar la claridad del flujo para el reclutador y el candidato.
 
-Formulario de entrevista: Diseñar la interfaz para introducir fecha, hora y modalidad.
+---
 
-Persistencia: Guardar la información de la entrevista (Interview Entity) en la base de datos.
+# 3. Panel de Control con Métricas Básicas
 
-Notificaciones: Integrar con el servicio de mensajería para enviar invitaciones y recordatorios.
+## User Story
 
-Integración con calendarios (opcional): Implementar la sincronización si se requiere.
+**Como Reclutador**, quiero ver un panel de control con métricas básicas (tiempo promedio de contratación, número de candidatos por oferta, etc.) para medir la eficiencia del proceso.
 
-Pruebas de usabilidad: Verificar la claridad del flujo para el reclutador y el candidato.
+## Descripción
 
-3. Panel de Control con Métricas Básicas
-User Story
-
-Como Reclutador, quiero ver un panel de control con métricas básicas (tiempo promedio de contratación, número de candidatos por oferta, etc.) para medir la eficiencia del proceso.
-
-Descripción
 El sistema mostrará un dashboard con indicadores clave (KPI) que permitan al reclutador o al equipo de RRHH evaluar la efectividad de su proceso de selección, identificar cuellos de botella y tomar decisiones basadas en datos.
 
-Criterios de Aceptación
+## Criterios de Aceptación
 
-Dado que el reclutador accede al panel de control,
-cuando existan datos de ofertas y candidatos en el sistema,
-entonces se mostrarán métricas como el tiempo promedio de contratación, el número de candidatos por oferta, la tasa de conversión, etc.
+- **Dado** que el reclutador accede al panel de control,  
+  **cuando** existan datos de ofertas y candidatos en el sistema,  
+  **entonces** se mostrarán métricas como el tiempo promedio de contratación, el número de candidatos por oferta, la tasa de conversión, etc.
 
-Dado que el reclutador desee filtrar por rango de fechas,
-cuando seleccione un período (por ejemplo, último trimestre),
-entonces el sistema recalculará las métricas y actualizará la visualización.
+- **Dado** que el reclutador desee filtrar por rango de fechas,  
+  **cuando** seleccione un período (por ejemplo, último trimestre),  
+  **entonces** el sistema recalculará las métricas y actualizará la visualización.
 
-Notas Adicionales
+## Notas Adicionales
 
-Se recomienda comenzar con KPIs sencillos y luego expandir a métricas más avanzadas (coste por contratación, satisfacción del candidato, etc.).
+- Se recomienda comenzar con KPIs sencillos y luego expandir a métricas más avanzadas (coste por contratación, satisfacción del candidato, etc.).
+- El panel de control debe ser responsivo y fácil de entender (gráficos, tablas).
 
-El panel de control debe ser responsivo y fácil de entender (gráficos, tablas).
+## Tareas
 
-Tareas
-
-Definición de KPIs: Identificar las métricas clave (tiempo promedio de contratación, número de postulaciones, etc.).
-
-Consultas y cálculos: Implementar la lógica de agregación de datos (SQL, ETL, etc.).
-
-Diseño de dashboard: Crear gráficos y tablas que muestren las métricas de forma clara.
-
-Filtros: Permitir filtrar por fechas, ofertas específicas, reclutadores, etc.
-
-Validación de datos: Asegurar la exactitud de los cálculos con datos de prueba y escenarios reales.
+- **Definición de KPIs:** Identificar las métricas clave (tiempo promedio de contratación, número de postulaciones, etc.).
+- **Consultas y cálculos:** Implementar la lógica de agregación de datos (SQL, ETL, etc.).
+- **Diseño de dashboard:** Crear gráficos y tablas que muestren las métricas de forma clara.
+- **Filtros:** Permitir filtrar por fechas, ofertas específicas, reclutadores, etc.
+- **Validación de datos:** Asegurar la exactitud de los cálculos con datos de prueba y escenarios reales.
 
 
 
-# ------------- BACKLOGS-------------###
+# ------------- BACKLOGS------------- ###
 
 
 -Backlog Resultado Prompt elegido (3):
