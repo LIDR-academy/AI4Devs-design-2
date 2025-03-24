@@ -1,0 +1,91 @@
+C4Component
+    title Diagrama C4 de Código - Servicio de Candidatos ATS
+    
+    Container_Boundary(candidatosService, "Servicio de Candidatos") {
+        Component(candidatoController, "CandidatoController", "Spring RestController", "API REST para gestión de perfiles de candidatos")
+        Component(aplicacionController, "AplicacionController", "Spring RestController", "API REST para gestión de aplicaciones a vacantes")
+        Component(silverMedalistController, "SilverMedalistController", "Spring RestController", "API REST para el programa de candidatos destacados no seleccionados")
+        Component(documentosController, "DocumentosController", "Spring RestController", "API REST para gestión de currículums y documentación")
+        
+        Component(candidatoService, "CandidatoService", "Spring Service", "Lógica de negocio para gestión de perfiles de candidatos")
+        Component(aplicacionService, "AplicacionService", "Spring Service", "Lógica de negocio para aplicaciones y procesos de selección")
+        Component(silverMedalistService, "SilverMedalistService", "Spring Service", "Gestión del programa de candidatos destacados para futuras oportunidades")
+        Component(documentosService, "DocumentosService", "Spring Service", "Gestión de archivos y documentación de candidatos")
+        Component(notificacionService, "NotificacionService", "Spring Service", "Envío de comunicaciones a candidatos")
+        Component(prediccionService, "PrediccionService", "Spring Service", "Cliente para el servicio de IA predictiva")
+        
+        Component(candidatoRepository, "CandidatoRepository", "Spring Data JPA", "Acceso a datos de candidatos")
+        Component(aplicacionRepository, "AplicacionRepository", "Spring Data JPA", "Acceso a datos de aplicaciones")
+        Component(documentoRepository, "DocumentoRepository", "Spring Data MongoDB", "Acceso a documentos y archivos")
+        
+        Component(vacantesClient, "VacantesClient", "FeignClient", "Cliente para servicio de vacantes")
+        Component(iaClient, "IAClient", "gRPC Client", "Cliente para motor de IA")
+        Component(integrationClient, "IntegrationClient", "RestTemplate", "Cliente para servicio de integración")
+        
+        Component(cacheManager, "CandidatosCacheManager", "Spring Cache", "Gestión de caché para datos frecuentes")
+        Component(securityFilter, "SecurityFilter", "Spring Security", "Filtro de autenticación y autorización")
+        Component(validationAspect, "ValidationAspect", "Spring AOP", "Validación de datos transversal")
+        Component(auditAspect, "AuditAspect", "Spring AOP", "Registro de auditoría de operaciones")
+    }
+    
+    ContainerDb(mainDB, "Base de Datos Principal", "PostgreSQL", "Almacenamiento de candidatos y aplicaciones")
+    ContainerDb(documentDB, "Almacén de Documentos", "MongoDB", "Almacenamiento de CVs y documentación")
+    Container(cache, "Caché Distribuida", "Redis", "Caché para perfiles y listas frecuentes")
+    Container(iaEngine, "Motor de IA", "Python", "Análisis predictivo y compatibilidad")
+    Container(vacantesService, "Servicio de Vacantes", "Java/Spring", "Gestión de vacantes")
+    Container(apiGateway, "API Gateway", "Node.js", "Puerta de entrada a servicios")
+    Container(integrationService, "Servicio de Integración", "Go", "Integración con sistemas externos")
+    
+    Rel(apiGateway, candidatoController, "Solicitudes REST", "JSON/HTTPS")
+    Rel(apiGateway, aplicacionController, "Solicitudes REST", "JSON/HTTPS")
+    Rel(apiGateway, silverMedalistController, "Solicitudes REST", "JSON/HTTPS")
+    Rel(apiGateway, documentosController, "Solicitudes REST", "JSON/HTTPS")
+    
+    Rel(candidatoController, securityFilter, "Pasa a través de", "HTTP Request")
+    Rel(aplicacionController, securityFilter, "Pasa a través de", "HTTP Request")
+    Rel(silverMedalistController, securityFilter, "Pasa a través de", "HTTP Request")
+    Rel(documentosController, securityFilter, "Pasa a través de", "HTTP Request")
+    
+    Rel(candidatoController, candidatoService, "Usa", "Java Method Call")
+    Rel(aplicacionController, aplicacionService, "Usa", "Java Method Call")
+    Rel(silverMedalistController, silverMedalistService, "Usa", "Java Method Call")
+    Rel(documentosController, documentosService, "Usa", "Java Method Call")
+    
+    Rel(candidatoService, validationAspect, "Interceptado por", "AOP")
+    Rel(aplicacionService, validationAspect, "Interceptado por", "AOP")
+    Rel(documentosService, validationAspect, "Interceptado por", "AOP")
+    
+    Rel(candidatoService, auditAspect, "Registrado por", "AOP")
+    Rel(aplicacionService, auditAspect, "Registrado por", "AOP")
+    Rel(silverMedalistService, auditAspect, "Registrado por", "AOP")
+    
+    Rel(candidatoService, candidatoRepository, "Usa", "Java Method Call")
+    Rel(candidatoService, prediccionService, "Solicita análisis", "Java Method Call")
+    Rel(candidatoService, notificacionService, "Envía comunicaciones", "Java Method Call")
+    Rel(candidatoService, cacheManager, "Usa", "Java Method Call")
+    
+    Rel(aplicacionService, aplicacionRepository, "Usa", "Java Method Call")
+    Rel(aplicacionService, candidatoRepository, "Usa", "Java Method Call")
+    Rel(aplicacionService, vacantesClient, "Consulta vacantes", "HTTP/JSON")
+    Rel(aplicacionService, prediccionService, "Solicita evaluación", "Java Method Call")
+    Rel(aplicacionService, notificacionService, "Notifica estado", "Java Method Call")
+    
+    Rel(silverMedalistService, candidatoRepository, "Usa", "Java Method Call")
+    Rel(silverMedalistService, aplicacionRepository, "Usa", "Java Method Call")
+    Rel(silverMedalistService, vacantesClient, "Busca coincidencias", "HTTP/JSON")
+    Rel(silverMedalistService, notificacionService, "Envía comunicaciones", "Java Method Call")
+    
+    Rel(documentosService, documentoRepository, "Usa", "MongoDB Client")
+    Rel(documentosService, candidatoRepository, "Usa", "Java Method Call")
+    
+    Rel(prediccionService, iaClient, "Solicita análisis", "gRPC")
+    Rel(notificacionService, integrationClient, "Solicita envío", "HTTP/JSON")
+    
+    Rel(candidatoRepository, mainDB, "Lee/Escribe", "JDBC")
+    Rel(aplicacionRepository, mainDB, "Lee/Escribe", "JDBC")
+    Rel(documentoRepository, documentDB, "Lee/Escribe", "MongoDB Driver")
+    Rel(cacheManager, cache, "Lee/Escribe", "Redis Client")
+    
+    Rel(iaClient, iaEngine, "Solicita análisis predictivo", "gRPC")
+    Rel(vacantesClient, vacantesService, "Consulta datos", "REST API")
+    Rel(integrationClient, integrationService, "Solicita integraciones", "REST API")

@@ -1,0 +1,42 @@
+sequenceDiagram
+    actor RH as Reclutador RH
+    participant ATS as Sistema ATS
+    participant JB as Bolsas de Trabajo
+    participant SM as Redes Sociales
+    participant Corp as Sitio Corporativo
+    
+    RH->>ATS: Crear nueva vacante
+    activate RH
+    activate ATS
+    RH->>ATS: Completar detalles del puesto
+    RH->>ATS: Definir requisitos y competencias
+    RH->>ATS: Configurar flujo de selección
+    RH->>ATS: Seleccionar canales de publicación
+    ATS-->>RH: Previsualizar anuncio
+    RH->>ATS: Aprobar y solicitar publicación
+    ATS->>JB: Distribuir vacante automáticamente
+    ATS->>SM: Publicar en canales sociales
+    ATS->>Corp: Actualizar sitio de carreras
+    JB-->>ATS: Confirmar publicación
+    SM-->>ATS: Confirmar publicación
+    Corp-->>ATS: Confirmar publicación
+    ATS-->>RH: Notificar publicación exitosa
+    deactivate ATS
+    
+    loop Monitoreo de Rendimiento
+        RH->>ATS: Consultar métricas de la vacante
+        activate ATS
+        ATS-->>RH: Mostrar estadísticas de visualización
+        ATS-->>RH: Mostrar tasa de conversión
+        ATS-->>RH: Mostrar calidad de aplicaciones
+        deactivate ATS
+    end
+    
+    RH->>ATS: Modificar parámetros de la vacante
+    activate ATS
+    ATS->>JB: Actualizar anuncio
+    ATS->>SM: Actualizar anuncio
+    ATS->>Corp: Actualizar anuncio
+    ATS-->>RH: Confirmar actualizaciones
+    deactivate ATS
+    deactivate RH

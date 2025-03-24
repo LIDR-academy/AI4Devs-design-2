@@ -1,0 +1,52 @@
+sequenceDiagram
+    actor RH as Reclutador RH
+    actor MGR as Gerente Contratante
+    participant ATS as Sistema ATS
+    participant IA as Motor IA de Evaluación
+    participant CAN as Candidato
+    
+    CAN->>ATS: Enviar aplicación
+    activate ATS
+    ATS->>CAN: Confirmar recepción
+    ATS->>IA: Solicitar análisis preliminar
+    activate IA
+    IA->>IA: Evaluar match con requisitos
+    IA->>IA: Analizar predicción de permanencia
+    IA->>IA: Calcular compatibilidad cultural
+    IA-->>ATS: Entregar score de evaluación
+    deactivate IA
+    
+    ATS-->>RH: Notificar nueva aplicación
+    activate RH
+    RH->>ATS: Revisar evaluación automática
+    ATS-->>RH: Mostrar dashboard de candidato
+    RH->>ATS: Clasificar candidato (apto/no apto)
+    
+    alt Candidato Preseleccionado
+        RH->>ATS: Programar evaluación técnica
+        ATS->>CAN: Enviar invitación a prueba técnica
+        CAN->>ATS: Completar evaluación técnica
+        ATS->>IA: Procesar resultados
+        activate IA
+        IA-->>ATS: Entregar análisis de competencias
+        deactivate IA
+        ATS-->>RH: Mostrar resultados técnicos
+        RH->>ATS: Avanzar candidato a entrevista
+        ATS->>MGR: Notificar candidato para entrevista
+        activate MGR
+        MGR->>ATS: Agendar entrevista
+        ATS->>CAN: Enviar invitación a entrevista
+        ATS->>MGR: Confirmar programación
+        ATS->>RH: Confirmar programación
+        deactivate MGR
+    else Candidato No Apto
+        RH->>ATS: Registrar motivo de rechazo
+        RH->>ATS: Clasificar para futuras vacantes
+        ATS->>CAN: Enviar notificación de estado
+        ATS->>ATS: Almacenar en programa Silver Medalists
+    end
+    
+    RH->>ATS: Actualizar estado del proceso
+    deactivate RH
+    ATS->>ATS: Actualizar métricas de reclutamiento
+    deactivate ATS

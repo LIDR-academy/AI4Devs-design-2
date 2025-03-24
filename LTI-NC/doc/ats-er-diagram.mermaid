@@ -1,0 +1,273 @@
+erDiagram
+    EMPRESA {
+        int empresa_id PK
+        varchar nombre
+        varchar industria
+        varchar tamano
+        datetime fecha_registro
+        boolean activo
+        jsonb configuracion_personalizada
+    }
+    
+    USUARIO {
+        int usuario_id PK
+        int empresa_id FK
+        varchar nombre
+        varchar apellido
+        varchar email
+        varchar contrasena_hash
+        varchar rol
+        datetime ultimo_acceso
+        boolean activo
+        jsonb preferencias
+    }
+    
+    VACANTE {
+        int vacante_id PK
+        int empresa_id FK
+        int creador_id FK
+        varchar titulo
+        text descripcion
+        varchar departamento
+        varchar ubicacion
+        varchar modalidad
+        varchar nivel_experiencia
+        decimal salario_min
+        decimal salario_max
+        varchar tipo_contrato
+        datetime fecha_publicacion
+        datetime fecha_cierre
+        varchar estado
+        jsonb requisitos
+        jsonb competencias_requeridas
+        jsonb etapas_proceso
+        jsonb metricas_rendimiento
+    }
+    
+    CANAL_PUBLICACION {
+        int canal_id PK
+        varchar nombre
+        varchar tipo
+        text configuracion_api
+        boolean activo
+    }
+    
+    PUBLICACION_VACANTE {
+        int publicacion_id PK
+        int vacante_id FK
+        int canal_id FK
+        datetime fecha_publicacion
+        varchar estado
+        varchar url_publicacion
+        int visualizaciones
+        int aplicaciones
+        jsonb metricas_canal
+    }
+    
+    CANDIDATO {
+        int candidato_id PK
+        varchar nombre
+        varchar apellido
+        varchar email
+        varchar telefono
+        text resumen
+        varchar linkedin_url
+        varchar ubicacion
+        decimal salario_esperado
+        datetime fecha_registro
+        varchar fuente_origen
+        jsonb experiencia_laboral
+        jsonb formacion_academica
+        jsonb habilidades
+        jsonb certificaciones
+        float score_permanencia
+        float score_cultural
+        boolean silver_medalist
+        jsonb datos_demograficos
+    }
+    
+    APLICACION {
+        int aplicacion_id PK
+        int vacante_id FK
+        int candidato_id FK
+        datetime fecha_aplicacion
+        varchar estado_actual
+        int etapa_actual
+        jsonb respuestas_preguntas
+        jsonb evaluaciones_tecnicas
+        jsonb entrevistas
+        jsonb notas_evaluacion
+        float score_global
+        varchar decision_final
+        datetime fecha_decision
+        jsonb historial_estados
+    }
+    
+    EVALUACION_TECNICA {
+        int evaluacion_id PK
+        varchar nombre
+        varchar descripcion
+        varchar tipo
+        text contenido
+        int duracion_minutos
+        float puntaje_minimo
+        varchar categoria
+        int industria_id FK
+        boolean activo
+        jsonb parametros_evaluacion
+    }
+    
+    RESULTADO_EVALUACION {
+        int resultado_id PK
+        int aplicacion_id FK
+        int evaluacion_id FK
+        datetime fecha_inicio
+        datetime fecha_fin
+        float puntaje_obtenido
+        jsonb respuestas_detalladas
+        jsonb analisis_competencias
+        text comentarios
+    }
+    
+    ENTREVISTA {
+        int entrevista_id PK
+        int aplicacion_id FK
+        varchar tipo_entrevista
+        datetime fecha_programada
+        int duracion_minutos
+        varchar modalidad
+        varchar ubicacion
+        varchar estado
+        jsonb participantes
+        jsonb plantilla_preguntas
+        jsonb resultado
+    }
+    
+    ENTREVISTADOR {
+        int entrevistador_id PK
+        int usuario_id FK
+        varchar departamento
+        varchar cargo
+        jsonb areas_especialidad
+        jsonb disponibilidad
+        float valoracion_promedio
+    }
+    
+    PARTICIPACION_ENTREVISTA {
+        int participacion_id PK
+        int entrevista_id FK
+        int entrevistador_id FK
+        varchar rol
+        jsonb evaluacion
+        text feedback
+        int calificacion
+    }
+    
+    PLANTILLA_CORREO {
+        int plantilla_id PK
+        int empresa_id FK
+        varchar nombre
+        varchar tipo
+        text contenido
+        jsonb variables_disponibles
+        boolean activo
+    }
+    
+    COMUNICACION {
+        int comunicacion_id PK
+        int aplicacion_id FK
+        int plantilla_id FK
+        int remitente_id FK
+        datetime fecha_envio
+        varchar tipo
+        text contenido
+        varchar estado
+        datetime fecha_lectura
+    }
+    
+    ONBOARDING {
+        int onboarding_id PK
+        int aplicacion_id FK
+        datetime fecha_inicio
+        datetime fecha_incorporacion
+        varchar estado
+        jsonb documentos_requeridos
+        jsonb actividades_completadas
+        jsonb actividades_pendientes
+        int gerente_id FK
+        int mentor_id FK
+        jsonb evaluaciones_seguimiento
+    }
+    
+    DOCUMENTO {
+        int documento_id PK
+        int entidad_id
+        varchar tipo_entidad
+        varchar nombre
+        varchar tipo_documento
+        varchar url_almacenamiento
+        datetime fecha_subida
+        varchar estado_validacion
+        varchar notas_validacion
+    }
+    
+    METRICAS_RECLUTAMIENTO {
+        int metrica_id PK
+        int empresa_id FK
+        int vacante_id FK
+        datetime periodo_inicio
+        datetime periodo_fin
+        int total_aplicaciones
+        int candidatos_entrevistados
+        int ofertas_realizadas
+        int contrataciones_completadas
+        float tiempo_promedio_contratacion
+        float costo_contratacion
+        float calidad_contratacion
+        jsonb metricas_por_fuente
+        jsonb metricas_por_etapa
+    }
+    
+    INTEGRACION_SISTEMA {
+        int integracion_id PK
+        int empresa_id FK
+        varchar nombre_sistema
+        varchar tipo_sistema
+        text configuracion_api
+        boolean activo
+        datetime ultima_sincronizacion
+        jsonb mapeo_campos
+    }
+    
+    EMPRESA ||--o{ USUARIO : tiene
+    EMPRESA ||--o{ VACANTE : publica
+    EMPRESA ||--o{ PLANTILLA_CORREO : posee
+    EMPRESA ||--o{ METRICAS_RECLUTAMIENTO : genera
+    EMPRESA ||--o{ INTEGRACION_SISTEMA : configura
+    
+    USUARIO ||--o{ VACANTE : crea
+    USUARIO ||--o{ ENTREVISTADOR : es
+    USUARIO }|--o{ COMUNICACION : envia
+    
+    VACANTE ||--o{ PUBLICACION_VACANTE : tiene
+    VACANTE ||--o{ APLICACION : recibe
+    VACANTE }|--o{ METRICAS_RECLUTAMIENTO : genera
+    
+    CANAL_PUBLICACION ||--o{ PUBLICACION_VACANTE : aloja
+    
+    CANDIDATO ||--o{ APLICACION : realiza
+    CANDIDATO ||--o{ DOCUMENTO : sube
+    
+    APLICACION ||--o{ RESULTADO_EVALUACION : genera
+    APLICACION ||--o{ ENTREVISTA : programa
+    APLICACION ||--o{ COMUNICACION : recibe
+    APLICACION ||--o{ ONBOARDING : avanza_a
+    
+    EVALUACION_TECNICA ||--o{ RESULTADO_EVALUACION : produce
+    
+    ENTREVISTA ||--o{ PARTICIPACION_ENTREVISTA : incluye
+    ENTREVISTADOR ||--o{ PARTICIPACION_ENTREVISTA : participa_en
+    
+    PLANTILLA_CORREO ||--o{ COMUNICACION : formatea
+    
+    ONBOARDING ||--o{ DOCUMENTO : requiere
