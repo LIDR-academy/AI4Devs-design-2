@@ -1,0 +1,282 @@
+@startuml Diagrama ERD - LTI ATS
+
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <b>x</b>
+!define foreign_key(x) <u>x</u>
+!define column(x) <i>x</i>
+
+skinparam class {
+  BackgroundColor White
+  ArrowColor #2C3E50
+  BorderColor #2C3E50
+  FontName Arial
+  FontSize 12
+}
+
+table(Usuario) {
+  primary_key(id): UUID
+  column(nombre): String
+  column(email): String
+  column(telefono): String
+  column(cargo): String
+  foreign_key(departamento_id): UUID
+  column(rol): Enum
+  column(permisos): JSON
+  column(ultimo_acceso): DateTime
+  column(estado): Enum
+  column(preferencias): JSON
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(Candidato) {
+  primary_key(id): UUID
+  column(nombre): String
+  column(email): String
+  column(telefono): String
+  column(ubicacion): String
+  column(resumen): Text
+  column(experiencia): JSON
+  column(educacion): JSON
+  column(habilidades): Array
+  column(certificaciones): Array
+  column(idiomas): JSON
+  column(salario_esperado): Decimal
+  column(disponibilidad): Date
+  column(referencias): JSON
+  foreign_key(fuente_id): UUID
+  column(perfil_social): JSON
+  column(documentos): JSON
+  column(notas_internas): Text
+  column(estado): Enum
+  column(vector_embeddings): Vector
+  column(puntuacion_ia): JSON
+  column(tags): Array
+  column(gdpr_consent): Boolean
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(Vacante) {
+  primary_key(id): UUID
+  column(titulo): String
+  foreign_key(departamento_id): UUID
+  column(ubicacion): String
+  column(tipo_contrato): Enum
+  column(modalidad): Enum
+  column(descripcion): Text
+  column(responsabilidades): Text
+  column(requisitos): JSON
+  column(competencias_requeridas): JSON
+  column(rango_salarial): JSON
+  column(beneficios): Text
+  foreign_key(flujo_trabajo_id): UUID
+  foreign_key(equipo_id): UUID
+  foreign_key(gerente_contratacion_id): UUID
+  column(fecha_publicacion): Date
+  column(fecha_cierre): Date
+  column(prioridad): Enum
+  column(estado): Enum
+  column(canales_publicacion): Array
+  column(cuota_contratacion): Integer
+  column(posiciones_cubiertas): Integer
+  column(vector_embeddings): Vector
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(Solicitud) {
+  primary_key(id): UUID
+  foreign_key(candidato_id): UUID
+  foreign_key(vacante_id): UUID
+  column(etapa_actual): String
+  column(estado): Enum
+  column(puntuacion_match): Decimal
+  column(puntuaciones_detalladas): JSON
+  column(fecha_aplicacion): DateTime
+  column(fuente_aplicacion): String
+  column(notas_internas): Text
+  column(documentos_adicionales): JSON
+  column(historial_etapas): JSON
+  column(decision_final): JSON
+  column(oferta): JSON
+  column(respuesta_oferta): Enum
+  column(feedback_rechazo): Text
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(Evaluacion) {
+  primary_key(id): UUID
+  foreign_key(solicitud_id): UUID
+  foreign_key(evaluador_id): UUID
+  column(tipo_evaluacion): Enum
+  column(criterios): JSON
+  column(comentarios): Text
+  column(recomendacion): Enum
+  column(archivos_adjuntos): JSON
+  column(duracion): Integer
+  column(fecha_evaluacion): DateTime
+  column(visibilidad): Enum
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(Entrevista) {
+  primary_key(id): UUID
+  foreign_key(solicitud_id): UUID
+  column(tipo): Enum
+  column(fecha_hora): DateTime
+  column(duracion_estimada): Integer
+  column(ubicacion): String
+  column(participantes): Array
+  column(estado): Enum
+  column(instrucciones_candidato): Text
+  column(instrucciones_internas): Text
+  column(recordatorios): JSON
+  column(grabacion_url): String
+  column(notas_tiempo_real): JSON
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(Competencia) {
+  primary_key(id): UUID
+  column(nombre): String
+  column(tipo): Enum
+  column(descripcion): Text
+  column(categoria): String
+  column(niveles): JSON
+  column(metodos_evaluacion): Array
+  column(preguntas_sugeridas): Array
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(FlujoTrabajo) {
+  primary_key(id): UUID
+  column(nombre): String
+  column(descripcion): Text
+  column(etapas): JSON
+  column(automatizaciones): JSON
+  column(plantillas_comunicacion): JSON
+  column(SLA): JSON
+  column(permisos_etapas): JSON
+  column(activo): Boolean
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(Comunicacion) {
+  primary_key(id): UUID
+  column(tipo): Enum
+  column(direccion): Enum
+  foreign_key(solicitud_id): UUID
+  foreign_key(candidato_id): UUID
+  foreign_key(usuario_id): UUID
+  column(asunto): String
+  column(contenido): Text
+  foreign_key(plantilla_id): UUID
+  column(variables_contexto): JSON
+  column(estado): Enum
+  column(programado_para): DateTime
+  column(adjuntos): JSON
+  column(metadata): JSON
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(Onboarding) {
+  primary_key(id): UUID
+  foreign_key(empleado_id): UUID
+  foreign_key(vacante_id): UUID
+  foreign_key(plan_id): UUID
+  column(fecha_inicio): Date
+  column(tareas): JSON
+  column(documentos_requeridos): JSON
+  column(accesos_sistemas): JSON
+  column(equipamiento): JSON
+  column(reuniones): JSON
+  foreign_key(mentor_id): UUID
+  column(progreso_general): Integer
+  column(estado): Enum
+  column(notas): Text
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(FuenteReclutamiento) {
+  primary_key(id): UUID
+  column(nombre): String
+  column(tipo): Enum
+  column(descripcion): Text
+  column(url): String
+  column(costo_promedio): Decimal
+  column(tiempo_conversion): Integer
+  column(metricas): JSON
+  column(activo): Boolean
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(Equipo) {
+  primary_key(id): UUID
+  column(nombre): String
+  column(descripcion): Text
+  foreign_key(lider_id): UUID
+  column(miembros): Array
+  column(vacantes_asignadas): Array
+  column(permisos): JSON
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(UsuarioEquipo) {
+  primary_key(id): UUID
+  foreign_key(usuario_id): UUID
+  foreign_key(equipo_id): UUID
+  column(rol): String
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(VacanteCompetencia) {
+  primary_key(id): UUID
+  foreign_key(vacante_id): UUID
+  foreign_key(competencia_id): UUID
+  column(nivel_requerido): Integer
+  column(es_obligatorio): Boolean
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+table(CandidatoCompetencia) {
+  primary_key(id): UUID
+  foreign_key(candidato_id): UUID
+  foreign_key(competencia_id): UUID
+  column(nivel): Integer
+  column(verificado): Boolean
+  column(fuente_verificacion): String
+  column(created_at): DateTime
+  column(updated_at): DateTime
+}
+
+' Relaciones
+Usuario "1" -- "N" Evaluacion : realiza
+Usuario "1" -- "N" Equipo : lidera
+Usuario "N" -- "M" Equipo : pertenece
+Candidato "1" -- "N" Solicitud : realiza
+Candidato "1" -- "N" Comunicacion : recibe
+Candidato "N" -- "M" Competencia : posee
+Candidato "N" -- "1" FuenteReclutamiento : proviene de
+Vacante "1" -- "N" Solicitud : tiene
+Vacante "N" -- "1" FlujoTrabajo : sigue
+Vacante "N" -- "1" Equipo : es gestionada por
+Vacante "N" -- "M" Competencia : requiere
+Solicitud "1" -- "N" Evaluacion : tiene
+Solicitud "1" -- "N" Entrevista : programa
+Solicitud "1" -- "N" Comunicacion : genera
+Solicitud "1" -- "0..1" Onboarding : resulta en
+Onboarding "N" -- "1" Usuario : tiene mentor
+
+@enduml 

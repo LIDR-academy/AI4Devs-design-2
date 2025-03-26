@@ -1,0 +1,64 @@
+@startuml Caso de Uso - Reclutamiento Inteligente
+
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam linetype ortho
+
+actor "Reclutador" as REC
+actor "Gerente de\nContratación" as GER
+actor "Candidato" as CAN
+actor "Sistema LTI ATS" as SYS
+
+rectangle "Reclutamiento Inteligente" {
+  usecase "Crear búsqueda\nde candidatos" as UC1
+  usecase "Definir requisitos\ndel puesto" as UC2
+  usecase "Analizar semánticamente\ndescripción del puesto" as UC3
+  usecase "Ejecutar emparejamiento\ncognitivo" as UC4
+  usecase "Presentar candidatos\nrecomendados" as UC5
+  usecase "Revisar perfiles\nde candidatos" as UC6
+  usecase "Seleccionar candidatos\npara entrevista" as UC7
+  usecase "Generar comunicaciones\npersonalizadas" as UC8
+  usecase "Programar\nentrevistas" as UC9
+  usecase "Evaluar\ncandidatos" as UC10
+  usecase "Analizar\nevaluaciones" as UC11
+  usecase "Seleccionar candidato\nfinal" as UC12
+  usecase "Iniciar proceso\nde oferta" as UC13
+  usecase "Aplicar a\nvacante" as UC14
+  usecase "Participar en\nentrevista" as UC15
+  usecase "Responder a\noferta" as UC16
+}
+
+REC --> UC1
+REC --> UC2
+SYS --> UC3
+SYS --> UC4
+SYS --> UC5
+REC --> UC6
+REC --> UC7
+SYS --> UC8
+SYS --> UC9
+REC --> UC10
+GER --> UC10
+SYS --> UC11
+REC --> UC12
+GER --> UC12
+SYS --> UC13
+CAN --> UC14
+CAN --> UC15
+CAN --> UC16
+
+UC1 ..> UC2 : <<include>>
+UC2 ..> UC3 : <<include>>
+UC3 ..> UC4 : <<include>>
+UC4 ..> UC5 : <<include>>
+UC6 ..> UC7 : <<include>>
+UC7 ..> UC8 : <<include>>
+UC8 ..> UC9 : <<include>>
+UC10 ..> UC11 : <<include>>
+UC11 ..> UC12 : <<include>>
+UC12 ..> UC13 : <<include>>
+UC13 ..> UC16 : <<include>>
+
+@enduml 

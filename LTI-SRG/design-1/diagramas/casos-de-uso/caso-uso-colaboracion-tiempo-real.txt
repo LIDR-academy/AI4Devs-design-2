@@ -1,0 +1,66 @@
+@startuml Caso de Uso - Colaboración en Tiempo Real
+
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam linetype ortho
+
+actor "Reclutador" as REC
+actor "Gerente de\nContratación" as GER
+actor "Miembros\ndel Equipo" as EQP
+actor "Ejecutivo\nC-Suite" as EXE
+actor "Candidato" as CAN
+actor "Sistema LTI ATS" as SYS
+
+rectangle "Colaboración en Tiempo Real" {
+  usecase "Crear espacio de\ntrabajo colaborativo" as UC1
+  usecase "Invitar stakeholders\nal proceso" as UC2
+  usecase "Asignar tareas\nde evaluación" as UC3
+  usecase "Enviar notificaciones\npersonalizadas" as UC4
+  usecase "Compartir notas\nen tiempo real" as UC5
+  usecase "Organizar comentarios\npor categorías" as UC6
+  usecase "Revisar grabación\ncon anotaciones" as UC7
+  usecase "Participar en discusiones\nasincrónicas" as UC8
+  usecase "Generar resumen\ncomparativo" as UC9
+  usecase "Participar en sesión\nde decisión final" as UC10
+  usecase "Registrar decisión\nconsensada" as UC11
+  usecase "Detectar evaluaciones\ndivergentes" as UC12
+  usecase "Programar sesión\nde alineación" as UC13
+  usecase "Facilitar discusión\nestructurada" as UC14
+}
+
+REC --> UC1
+REC --> UC2
+REC --> UC3
+SYS --> UC4
+REC --> UC5
+GER --> UC5
+EQP --> UC5
+SYS --> UC6
+EQP --> UC7
+REC --> UC8
+GER --> UC8
+EQP --> UC8
+EXE --> UC8
+SYS --> UC9
+REC --> UC10
+GER --> UC10
+EQP --> UC10
+EXE --> UC10
+SYS --> UC11
+SYS --> UC12
+REC --> UC13
+SYS --> UC14
+
+UC1 ..> UC2 : <<include>>
+UC2 ..> UC3 : <<include>>
+UC3 ..> UC4 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC8 ..> UC9 : <<include>>
+UC9 ..> UC10 : <<include>>
+UC10 ..> UC11 : <<include>>
+UC12 ..> UC13 : <<include>>
+UC13 ..> UC14 : <<include>>
+
+@enduml 

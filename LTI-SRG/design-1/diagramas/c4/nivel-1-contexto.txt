@@ -1,0 +1,37 @@
+@startuml C4 Nivel 1 - Diagrama de Contexto
+
+!include <C4/C4_Context>
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama de Contexto - LTI ATS
+
+Person(reclutador, "Reclutador", "Profesional de RRHH que gestiona el proceso de contratación")
+Person(gerente, "Gerente de Contratación", "Líder de departamento con necesidades de contratación")
+Person(candidato, "Candidato", "Persona que aplica a posiciones abiertas")
+Person(admin, "Administrador del Sistema", "Personal técnico que configura y mantiene el sistema")
+Person(rrhh, "Equipo de RRHH", "Personal administrativo de recursos humanos")
+
+System(lti_ats, "LTI ATS", "Sistema de seguimiento de candidatos que transforma el proceso de reclutamiento mediante IA, colaboración en tiempo real y automatización inteligente")
+
+System_Ext(job_portals, "Portales de Empleo", "Plataformas como LinkedIn, Indeed, etc.")
+System_Ext(hris, "Sistemas HRIS", "Sistemas de información de recursos humanos existentes")
+System_Ext(email, "Plataformas de Correo Electrónico", "Servicios para comunicación con candidatos")
+System_Ext(calendar, "Sistemas de Calendario", "Para programación de entrevistas")
+System_Ext(verification, "Sistemas de Verificación", "Para comprobación de antecedentes y referencias")
+System_Ext(payroll, "Sistemas de Nómina", "Para la integración de nuevos empleados")
+
+Rel(reclutador, lti_ats, "Utiliza para gestionar procesos de contratación")
+Rel(gerente, lti_ats, "Utiliza para evaluar candidatos y tomar decisiones")
+Rel(candidato, lti_ats, "Aplica a posiciones y participa en el proceso")
+Rel(admin, lti_ats, "Configura y mantiene")
+Rel(rrhh, lti_ats, "Utiliza para tareas administrativas")
+
+Rel(lti_ats, job_portals, "Publica vacantes y obtiene candidatos")
+Rel(lti_ats, hris, "Sincroniza datos de empleados y departamentos")
+Rel(lti_ats, email, "Envía comunicaciones")
+Rel(lti_ats, calendar, "Programa entrevistas")
+Rel(lti_ats, verification, "Verifica antecedentes y referencias")
+Rel(lti_ats, payroll, "Transfiere datos de nuevos empleados")
+
+@enduml 

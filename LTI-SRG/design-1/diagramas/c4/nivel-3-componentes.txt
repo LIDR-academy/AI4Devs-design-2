@@ -1,0 +1,74 @@
+@startuml C4 Nivel 3 - Diagrama de Componentes
+
+!include <C4/C4_Component>
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama de Componentes - Servicio de Candidatos
+
+Container_Boundary(candidate_service, "Servicio de Candidatos") {
+    Component(candidate_api, "API de Candidatos", "NestJS, REST", "Expone endpoints RESTful para operaciones CRUD sobre candidatos")
+    
+    Component(profile_manager, "Gestor de Perfiles", "TypeScript", "Maneja la creación y actualización de perfiles de candidatos")
+    
+    Component(search_engine, "Motor de Búsqueda", "TypeScript, Elasticsearch", "Implementa la búsqueda avanzada de candidatos")
+    
+    Component(cv_analyzer, "Analizador de CV", "Python, NLP", "Extrae información estructurada de currículos")
+    
+    Component(matching_service, "Servicio de Emparejamiento", "TypeScript, ML", "Implementa el algoritmo de matching entre candidatos y vacantes")
+    
+    Component(document_manager, "Gestor de Documentos", "TypeScript", "Administra los documentos asociados a candidatos")
+    
+    Component(enrichment_service, "Servicio de Enriquecimiento", "TypeScript", "Enriquece perfiles con datos de fuentes externas")
+    
+    Component(candidate_repository, "Repositorio de Candidatos", "TypeScript, MongoDB", "Capa de acceso a datos para candidatos")
+    
+    Component(event_client, "Cliente de Eventos", "TypeScript, Kafka", "Publica y suscribe a eventos relacionados con candidatos")
+    
+    Component(vectorization_service, "Servicio de Vectorización", "Python, BERT", "Convierte perfiles a representaciones vectoriales para búsqueda semántica")
+}
+
+Container(api_gateway, "API Gateway", "Node.js, Express", "Punto de entrada para todas las solicitudes")
+
+Container(job_service, "Servicio de Vacantes", "Node.js, NestJS", "Administra posiciones abiertas")
+
+Container(ai_engine, "Motor de IA", "Python, TensorFlow", "Proporciona capacidades de IA")
+
+ContainerDb(document_db, "Base de Datos Documental", "MongoDB", "Almacena perfiles y documentos")
+
+ContainerDb(vector_db, "Base de Datos Vectorial", "Pinecone", "Optimizada para búsqueda semántica")
+
+ContainerDb(object_storage, "Almacenamiento de Objetos", "S3", "Documentos, CV, portafolios")
+
+Container(event_bus, "Bus de Eventos", "Apache Kafka", "Facilita comunicación asíncrona")
+
+System_Ext(job_portals, "Portales de Empleo", "LinkedIn, Indeed, etc.")
+
+' Relaciones Externas
+Rel(api_gateway, candidate_api, "Enruta solicitudes", "gRPC")
+Rel(job_service, matching_service, "Solicita emparejamiento", "gRPC")
+Rel(event_client, event_bus, "Publica/Suscribe", "Eventos")
+Rel(candidate_repository, document_db, "Lee/Escribe", "MongoDB Driver")
+Rel(vectorization_service, vector_db, "Almacena vectores", "API")
+Rel(document_manager, object_storage, "Almacena/Recupera", "API")
+Rel(enrichment_service, job_portals, "Obtiene datos", "API")
+Rel(cv_analyzer, ai_engine, "Utiliza modelos NLP", "API")
+Rel(matching_service, ai_engine, "Utiliza modelos ML", "API")
+
+' Relaciones Internas
+Rel(candidate_api, profile_manager, "Utiliza")
+Rel(candidate_api, search_engine, "Utiliza")
+Rel(candidate_api, document_manager, "Utiliza")
+Rel(profile_manager, candidate_repository, "Utiliza")
+Rel(profile_manager, event_client, "Publica eventos")
+Rel(profile_manager, cv_analyzer, "Utiliza")
+Rel(profile_manager, enrichment_service, "Utiliza")
+Rel(search_engine, candidate_repository, "Consulta")
+Rel(search_engine, vectorization_service, "Utiliza")
+Rel(document_manager, candidate_repository, "Actualiza")
+Rel(matching_service, vectorization_service, "Utiliza")
+Rel(matching_service, candidate_repository, "Consulta")
+Rel(enrichment_service, candidate_repository, "Actualiza")
+Rel(cv_analyzer, vectorization_service, "Alimenta")
+
+@enduml 

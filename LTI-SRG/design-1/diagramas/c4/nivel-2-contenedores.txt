@@ -1,0 +1,85 @@
+@startuml C4 Nivel 2 - Diagrama de Contenedores
+
+!include <C4/C4_Container>
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama de Contenedores - LTI ATS
+
+Person(reclutador, "Reclutador", "Profesional de RRHH")
+Person(gerente, "Gerente de Contratación", "Líder de departamento")
+Person(candidato, "Candidato", "Aplicante a posición")
+Person(admin, "Administrador", "Administrador del sistema")
+
+System_Boundary(lti_ats, "LTI ATS") {
+    Container(web_app, "Aplicación Web SPA", "React, TypeScript", "Interfaz principal para reclutadores, gerentes y administradores")
+    Container(portal_candidatos, "Portal de Candidatos", "React, TypeScript", "Interfaz para candidatos")
+    Container(mobile_app, "Aplicación Móvil", "React Native", "Versión móvil para reclutadores y gerentes")
+    
+    Container(api_gateway, "API Gateway", "Node.js, Express", "Punto de entrada para todas las solicitudes")
+    
+    Container(backend_services, "Servicios de Backend", "Node.js, NestJS", "Conjunto de microservicios que implementan la lógica de negocio")
+    
+    Container(ai_engine, "Motor de IA", "Python, TensorFlow", "Servicios de inteligencia artificial para análisis y recomendaciones")
+    
+    Container(event_bus, "Bus de Eventos", "Apache Kafka", "Sistema de mensajería para comunicación entre servicios")
+    
+    ContainerDb(relational_db, "Base de Datos Relacional", "PostgreSQL", "Almacenamiento principal para datos transaccionales")
+    
+    ContainerDb(document_db, "Base de Datos Documental", "MongoDB", "Almacenamiento para perfiles y documentos")
+    
+    ContainerDb(vector_db, "Base de Datos Vectorial", "Pinecone", "Almacenamiento optimizado para búsqueda semántica")
+    
+    ContainerDb(object_storage, "Almacenamiento de Objetos", "S3", "Para documentos, CV, portafolios, etc.")
+    
+    ContainerDb(cache_db, "Caché Distribuida", "Redis", "Para datos de acceso frecuente y sesiones")
+    
+    ContainerDb(data_warehouse, "Data Warehouse", "Snowflake", "Para análisis y reportes")
+}
+
+System_Ext(job_portals, "Portales de Empleo", "LinkedIn, Indeed, etc.")
+System_Ext(hris, "Sistemas HRIS", "Sistemas de información de RRHH")
+System_Ext(email, "Plataformas de Email", "Servicios de correo electrónico")
+System_Ext(calendar, "Sistemas de Calendario", "Para programación de entrevistas")
+System_Ext(verification, "Sistemas de Verificación", "Comprobación de antecedentes")
+System_Ext(payroll, "Sistemas de Nómina", "Para integración de empleados")
+
+' Relaciones - Usuarios a Interfaces
+Rel(reclutador, web_app, "Utiliza", "HTTPS")
+Rel(reclutador, mobile_app, "Utiliza", "HTTPS")
+Rel(gerente, web_app, "Utiliza", "HTTPS")
+Rel(gerente, mobile_app, "Utiliza", "HTTPS")
+Rel(candidato, portal_candidatos, "Utiliza", "HTTPS")
+Rel(admin, web_app, "Administra", "HTTPS")
+
+' Relaciones - Interfaces a API Gateway
+Rel(web_app, api_gateway, "Consume API", "HTTPS/JSON")
+Rel(portal_candidatos, api_gateway, "Consume API", "HTTPS/JSON")
+Rel(mobile_app, api_gateway, "Consume API", "HTTPS/JSON")
+
+' Relaciones - API Gateway a Servicios
+Rel(api_gateway, backend_services, "Enruta solicitudes", "gRPC")
+
+' Relaciones - Servicios a Bus de Eventos
+Rel(backend_services, event_bus, "Publica/Suscribe", "Eventos")
+
+' Relaciones - Servicios a Bases de Datos
+Rel(backend_services, relational_db, "Lee/Escribe", "SQL")
+Rel(backend_services, document_db, "Lee/Escribe", "MongoDB Driver")
+Rel(backend_services, vector_db, "Consulta", "API")
+Rel(backend_services, object_storage, "Almacena/Recupera", "API")
+Rel(backend_services, cache_db, "Almacena/Recupera", "Redis Client")
+Rel(backend_services, data_warehouse, "Analiza", "SQL")
+
+' Relaciones - Servicios a Motor de IA
+Rel(backend_services, ai_engine, "Utiliza", "API")
+
+' Relaciones - Servicios a Sistemas Externos
+Rel(backend_services, job_portals, "Integra con", "API")
+Rel(backend_services, hris, "Integra con", "API")
+Rel(backend_services, email, "Envía a través de", "SMTP/API")
+Rel(backend_services, calendar, "Programa a través de", "API")
+Rel(backend_services, verification, "Verifica a través de", "API")
+Rel(backend_services, payroll, "Integra con", "API")
+
+@enduml 
