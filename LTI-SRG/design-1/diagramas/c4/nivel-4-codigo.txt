@@ -1,0 +1,66 @@
+@startuml Diagrama de Código - Motor de Emparejamiento Cognitivo
+
+' Configuración de estilos
+skinparam componentStyle uml2
+skinparam component {
+  BackgroundColor #438DD5
+  BorderColor #3C7FC0
+  FontColor #FFFFFF
+}
+
+skinparam rectangle {
+  BackgroundColor #FFFFFF
+  BorderColor #3C7FC0
+  FontColor #000000
+}
+
+' Definición del componente principal
+rectangle "Servicio de Emparejamiento" {
+  component "MatchingService\n(Clase principal que coordina\nel proceso de emparejamiento)" as MatchingService
+  
+  component "ProfileVectorizer\n(Convierte perfiles de candidatos\nen vectores de características)" as ProfileVectorizer
+  
+  component "JobVectorizer\n(Convierte descripciones de trabajo\nen vectores de características)" as JobVectorizer
+  
+  component "SemanticMatcher\n(Implementa algoritmos\nde similitud semántica)" as SemanticMatcher
+  
+  component "SkillsAnalyzer\n(Analiza y normaliza\nhabilidades técnicas)" as SkillsAnalyzer
+  
+  component "ExperienceEvaluator\n(Evalúa la relevancia\nde la experiencia laboral)" as ExperienceEvaluator
+  
+  component "CulturalFitPredictor\n(Predice la alineación cultural)" as CulturalFitPredictor
+  
+  component "WeightOptimizer\n(Ajusta dinámicamente los pesos\nde diferentes factores)" as WeightOptimizer
+  
+  component "MatchResult\n(Encapsula los resultados del emparejamiento\ncon puntuaciones detalladas)" as MatchResult
+  
+  component "FeedbackProcessor\n(Procesa retroalimentación para\nmejorar futuros emparejamientos)" as FeedbackProcessor
+  
+  component "VectorRepository\n(Accede al almacenamiento\nde vectores)" as VectorRepository
+  
+  component "MLModelClient\n(Interactúa con modelos\nde aprendizaje automático)" as MLModelClient
+}
+
+' Relaciones
+MatchingService --> ProfileVectorizer : Utiliza
+MatchingService --> JobVectorizer : Utiliza
+MatchingService --> SemanticMatcher : Utiliza
+MatchingService --> SkillsAnalyzer : Utiliza
+MatchingService --> ExperienceEvaluator : Utiliza
+MatchingService --> CulturalFitPredictor : Utiliza
+MatchingService --> WeightOptimizer : Utiliza
+MatchingService --> MatchResult : Crea
+MatchingService --> FeedbackProcessor : Utiliza
+MatchingService --> VectorRepository : Utiliza
+MatchingService --> MLModelClient : Utiliza
+
+ProfileVectorizer --> VectorRepository : Almacena en
+JobVectorizer --> VectorRepository : Almacena en
+SemanticMatcher --> VectorRepository : Consulta
+WeightOptimizer --> FeedbackProcessor : Obtiene datos de
+FeedbackProcessor --> MLModelClient : Actualiza
+SkillsAnalyzer --> MLModelClient : Consulta
+ExperienceEvaluator --> MLModelClient : Consulta
+CulturalFitPredictor --> MLModelClient : Consulta
+
+@enduml 
