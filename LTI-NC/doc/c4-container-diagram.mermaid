@@ -1,0 +1,88 @@
+C4Container
+    title Diagrama de Contenedores del Sistema ATS Innovador
+    
+    Person(reclutador, "Reclutador", "Profesional de RH que gestiona el proceso de selección")
+    Person(gerente, "Gerente Contratante", "Responsable del departamento que solicita la contratación")
+    Person(candidato, "Candidato", "Persona que aplica a una posición abierta")
+    Person(administrador, "Administrador del Sistema", "Gestiona configuraciones y permisos")
+    
+    System_Boundary(ats, "Sistema ATS Innovador") {
+        Container(webApp, "Aplicación Web", "React, NextJS", "Portal responsivo para reclutadores, gerentes y administradores")
+        Container(mobileApp, "Aplicación Móvil", "React Native", "Aplicación para acceso móvil con funcionalidades esenciales")
+        Container(candidatoPortal, "Portal del Candidato", "React, NextJS", "Interfaz para candidatos que aplican y realizan pruebas")
+        
+        Container(apiGateway, "API Gateway", "Node.js, Express", "Puerta de entrada unificada para todas las APIs")
+        
+        Container(vacantesService, "Servicio de Vacantes", "Java, Spring Boot", "Gestiona creación y publicación de vacantes")
+        Container(candidatosService, "Servicio de Candidatos", "Java, Spring Boot", "Administra perfiles y aplicaciones")
+        Container(evaluacionService, "Servicio de Evaluación", "Python, FastAPI", "Coordina pruebas y entrevistas")
+        Container(comunicacionService, "Servicio de Comunicación", "Node.js, NestJS", "Gestiona notificaciones y mensajes")
+        Container(onboardingService, "Servicio de Onboarding", "Java, Spring Boot", "Facilita incorporación de nuevos empleados")
+        Container(analiticaService, "Servicio de Analítica", "Python, FastAPI", "Genera reportes y métricas")
+        
+        Container(iaEngine, "Motor de IA", "Python, TensorFlow, PyTorch", "Ejecuta modelos predictivos y análisis avanzados")
+        
+        ContainerDb(mainDB, "Base de Datos Principal", "PostgreSQL", "Almacenamiento relacional para datos operativos")
+        ContainerDb(documentDB, "Almacén de Documentos", "MongoDB", "Gestión de CVs y documentación")
+        ContainerDb(analyticsDB, "Base de Datos Analítica", "ClickHouse", "Almacenamiento optimizado para análisis")
+        Container(cache, "Caché Distribuida", "Redis", "Mejora rendimiento almacenando datos frecuentes")
+        
+        Container(integrationService, "Servicio de Integración", "Go", "Orquesta conexiones con sistemas externos")
+    }
+    
+    System_Ext(bolsasTrabajo, "Bolsas de Trabajo", "Portales de empleo externos")
+    System_Ext(hris, "Sistema HRIS", "Sistema de información de RH")
+    System_Ext(proveedorEmail, "Proveedor de Email", "Servicio para envío de comunicaciones")
+    System_Ext(proveedorSMS, "Proveedor de SMS", "Servicio para envío de mensajes de texto")
+    System_Ext(servicioCalendario, "Servicio de Calendario", "Plataforma de gestión de agendas")
+    
+    Rel(reclutador, webApp, "Utiliza", "HTTPS")
+    Rel(reclutador, mobileApp, "Utiliza", "HTTPS")
+    Rel(gerente, webApp, "Utiliza", "HTTPS")
+    Rel(gerente, mobileApp, "Utiliza", "HTTPS")
+    Rel(candidato, candidatoPortal, "Utiliza", "HTTPS")
+    Rel(administrador, webApp, "Utiliza", "HTTPS")
+    
+    Rel(webApp, apiGateway, "Realiza peticiones a", "HTTPS, JSON")
+    Rel(mobileApp, apiGateway, "Realiza peticiones a", "HTTPS, JSON")
+    Rel(candidatoPortal, apiGateway, "Realiza peticiones a", "HTTPS, JSON")
+    
+    Rel(apiGateway, vacantesService, "Enruta peticiones a", "JSON/HTTP")
+    Rel(apiGateway, candidatosService, "Enruta peticiones a", "JSON/HTTP")
+    Rel(apiGateway, evaluacionService, "Enruta peticiones a", "JSON/HTTP")
+    Rel(apiGateway, comunicacionService, "Enruta peticiones a", "JSON/HTTP")
+    Rel(apiGateway, onboardingService, "Enruta peticiones a", "JSON/HTTP")
+    Rel(apiGateway, analiticaService, "Enruta peticiones a", "JSON/HTTP")
+    
+    Rel(vacantesService, mainDB, "Lee/escribe", "SQL/JDBC")
+    Rel(candidatosService, mainDB, "Lee/escribe", "SQL/JDBC")
+    Rel(evaluacionService, mainDB, "Lee/escribe", "SQL/JDBC")
+    Rel(comunicacionService, mainDB, "Lee/escribe", "SQL/JDBC")
+    Rel(onboardingService, mainDB, "Lee/escribe", "SQL/JDBC")
+    
+    Rel(candidatosService, documentDB, "Almacena documentos", "MongoDB API")
+    Rel(onboardingService, documentDB, "Almacena documentos", "MongoDB API")
+    
+    Rel(analiticaService, analyticsDB, "Lee/escribe", "SQL")
+    Rel(analiticaService, mainDB, "Lee datos", "SQL/JDBC")
+    
+    Rel(vacantesService, cache, "Utiliza", "Redis API")
+    Rel(candidatosService, cache, "Utiliza", "Redis API")
+    Rel(evaluacionService, cache, "Utiliza", "Redis API")
+    
+    Rel(candidatosService, iaEngine, "Utiliza para análisis", "gRPC")
+    Rel(evaluacionService, iaEngine, "Utiliza para análisis", "gRPC")
+    Rel(analiticaService, iaEngine, "Utiliza para predicciones", "gRPC")
+    
+    Rel(iaEngine, analyticsDB, "Lee datos históricos", "SQL")
+    
+    Rel(vacantesService, integrationService, "Solicita publicación", "JSON/HTTP")
+    Rel(comunicacionService, integrationService, "Solicita envío de mensajes", "JSON/HTTP")
+    Rel(onboardingService, integrationService, "Solicita transferencia de datos", "JSON/HTTP")
+    Rel(evaluacionService, integrationService, "Solicita programación", "JSON/HTTP")
+    
+    Rel(integrationService, bolsasTrabajo, "Publica vacantes", "APIs específicas")
+    Rel(integrationService, hris, "Transfiere datos", "API/SOAP")
+    Rel(integrationService, proveedorEmail, "Envía emails", "SMTP/API")
+    Rel(integrationService, proveedorSMS, "Envía SMS", "API")
+    Rel(integrationService, servicioCalendario, "Gestiona eventos", "API")
